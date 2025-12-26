@@ -159,7 +159,7 @@ const Registration = () => {
             <div className="bg-[#1F4B43] flex flex-col p-6 lg:p-10 rounded-t-md rounded-b-none lg:rounded-l-md lg:rounded-r-none lg:rounded-t-md lg:rounded-b-md lg:rounded-br-none w-full lg:w-1/2 relative">
               <input
                 onChange={handleSignupFormChange}
-                className="w-full p-4 outline-0 bg-white rounded-2xl mt-5"
+                className="w-full p-4 outline-0 bg-white rounded-2xl "
                 name="surname"
                 type="text"
                 placeholder="SURNAME"
@@ -240,58 +240,66 @@ const Registration = () => {
             </div>
 
             <div className=" bg-[#04684C] flex flex-col p-6 lg:p-10 rounded-b-md rounded-t-none lg:rounded-r-md lg:rounded-l-none lg:rounded-t-md lg:rounded-br-md w-full lg:w-1/2 lg:mt-0">
-              <input
-                onChange={handleSignupFormChange}
-                className="w-full p-4 outline-0 bg-white rounded-2xl file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100"
-                name="image"
-                type="file"
-                accept=".jpg, .jpeg, .png, .gif"
-                placeholder="UPLOAD IMAGE"
-              />
-              {errorMessages.image && (
-                <p className="text-red-400 text-sm mt-1">
-                  {errorMessages.image}
-                </p>
-              )}
+              <div>
+                <input
+                  onChange={handleSignupFormChange}
+                  className="w-full p-3 outline-0 bg-white rounded-2xl file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100"
+                  name="image"
+                  type="file"
+                  accept=".jpg, .jpeg, .png, .gif"
+                  placeholder="UPLOAD IMAGE"
+                />
+                {errorMessages.image && (
+                  <p className="text-red-400 text-sm mt-1">
+                    {errorMessages.image}
+                  </p>
+                )}
+              </div>
+              <div>
+                <input
+                  onChange={handleSignupFormChange}
+                  className="w-full p-4 outline-0 bg-white rounded-2xl mt-5"
+                  name="number"
+                  type="text"
+                  placeholder="PHONE NUMBER"
+                  value={signupFormData.number}
+                />
+                {errorMessages.number && (
+                  <p className="text-red-600">{errorMessages.number}</p>
+                )}
+              </div>
 
-              <input
-                onChange={handleSignupFormChange}
-                className="w-full p-4 outline-0 bg-white rounded-2xl"
-                name="number"
-                type="text"
-                placeholder="PHONE NUMBER"
-                value={signupFormData.number}
-              />
-              {errorMessages.number && (
-                <p className="text-red-600">{errorMessages.number}</p>
-              )}
-              <select
-                onChange={handleSignupFormChange}
-                value={signupFormData.gender}
-                name="gender"
-                className="w-full p-4 outline-0 bg-white rounded-2xl mt-5"
-              >
-                <option>GENDER</option>
-                <option value="MALE">MALE</option>
-                <option value="FEMALE">FEMALE</option>
-              </select>
-              {errorMessages.gender && (
-                <p className="text-red-600">{errorMessages.gender}</p>
-              )}
+              <div>
+                <select
+                  onChange={handleSignupFormChange}
+                  value={signupFormData.gender}
+                  name="gender"
+                  className="w-full p-4 outline-0 bg-white rounded-2xl mt-5"
+                >
+                  <option>GENDER</option>
+                  <option value="MALE">MALE</option>
+                  <option value="FEMALE">FEMALE</option>
+                </select>
+                {errorMessages.gender && (
+                  <p className="text-red-600">{errorMessages.gender}</p>
+                )}
+              </div>
 
-              <select
-                onChange={handleSignupFormChange}
-                value={signupFormData.status}
-                name="status"
-                className="w-full p-4 outline-0 bg-white rounded-2xl mt-5"
-              >
-                <option>STATUS</option>
-                <option value="BUSINESS OWNER">BUSSINESS OWNER</option>
-                <option value="INVESTOR">INVESTOR</option>
-              </select>
-              {errorMessages.status && (
-                <p className="text-red-600">{errorMessages.status}</p>
-              )}
+              <div>
+                <select
+                  onChange={handleSignupFormChange}
+                  value={signupFormData.status}
+                  name="status"
+                  className="w-full p-4 outline-0 bg-white rounded-2xl mt-5"
+                >
+                  <option>STATUS</option>
+                  <option value="BUSINESS OWNER">BUSSINESS OWNER</option>
+                  <option value="INVESTOR">INVESTOR</option>
+                </select>
+                {errorMessages.status && (
+                  <p className="text-red-600">{errorMessages.status}</p>
+                )}
+              </div>
 
               <div className="flex mx-auto items-center justify-center mt-8 w-full">
                 <button className="bg-white border-2 py-2 px-3 rounded-md cursor-pointer text-[#04684C] font-bold font-montserat">

@@ -1,119 +1,98 @@
 import React from "react";
+import blackimage1 from "../assets/black image 1.jpeg";
+import blackimage2 from "../assets/black image 2.jpeg";
+import blackimage3 from "../assets/black image 3.jpeg";
+import blackimage4 from "../assets/black image 4.jpeg";
+import { Slide, Fade } from "react-awesome-reveal";
 const Team = () => {
   return (
-    <section className="w-full flex flex-col justify-center items-center font-montserat px-10 py-10 gap-5">
-      <div className="flex flex-col justify-center items-center">
-        <h1 className="uppercase text-[#04684C] text-4xl font-bold mt-2.5 w-[500px] text-center">
-          How It Works
-        </h1>
-        <p className="text-center text-gray-700">
-          Simple, transparent, and secure process for both businesses and
-          investors
-        </p>
-      </div>
-
-      <div className=" flex justify-around items-center mt-5 w-full px-20">
-        <div>
-          <h1 className=" bg-[#04684C] py-2.5 px-5 w-fit mb-2.5 rounded-md text-white font-bold">
-            For Businesses
-          </h1>
-
-          <div className="border border-gray-300 rounded-md p-5 mb-5 flex justify-center items-center gap-5 w-[500px]">
-            <span className="bg-[#04684C] px-5 py-2.5 rounded-md text-white font-bold">
-              1
-            </span>
-            <div>
-              <h2 className="font-bold text-xm text-[#04684C]">
-                Create Your Request
-              </h2>
-              <p className=" text-gray-700">
-                Describe your business, funding needs, and the terms you're
-                offering to investors.
-              </p>
-            </div>
+    <Fade>
+      <section className=" mx-auto p-20 w-full flex flex-col gap-10 font-montserat max-[600px]:px-5">
+        <div className="flex flex-col justify-center items-center">
+          <h2 className="text-4xl font-bold mb-2 text-[#04684C]">
+            Meet Our Team of Expert
+          </h2>
+          <p>We are good at what we do</p>
+        </div>
+        <div className="grid grid-cols-1 items-center justify-between mx-auto md:grid-cols-2 lg:grid-cols-4 gap-30 max-[600px]:gap-15">
+          <div className="text-center">
+            <img
+              className="w-[170px] mb-3 rounded-full"
+              src={blackimage1}
+              alt="team member1"
+            />
+            <h2 className="font-bold">John Adebayo</h2>
+            <p className="text-xs">Servce Support</p>
           </div>
-
-          <div className="border border-gray-300 rounded-md p-5 mb-5 flex justify-center items-center gap-5 w-[500px]">
-            <span className="bg-[#04684C] px-5 py-2.5 rounded-md text-white font-bold">
-              2
-            </span>
-            <div>
-              <h2 className="font-bold text-xm text-[#04684C]">
-                Connect with Investors
-              </h2>
-              <p className=" text-gray-700">
-                Receive interest from investors, answer questions, and negotiate
-                terms through our secure platform.
-              </p>
-            </div>
+          <div className="text-center">
+            <img
+              className="w-[170px] mb-3 rounded-full"
+              src={blackimage2}
+              alt="team member2"
+            />
+            <h2 className="font-bold">Sarah Oluwatobi</h2>
+            <p className="text-xs">Marketing Manager</p>
           </div>
-
-          <div className="border border-gray-300 rounded-md p-5 mb-5 flex justify-center items-center gap-5 w-[500px]">
-            <span className="bg-[#04684C] px-5 py-2.5 rounded-md text-white font-bold">
-              3
-            </span>
-            <div>
-              <h2 className="font-bold text-xm text-[#04684C]">
-                Receive Funding
-              </h2>
-              <p className=" text-gray-700">
-                Once funded, receive your capital and start growing. Repay
-                according to your agreed schedule.
-              </p>
-            </div>
+          <div className="text-center">
+            <img
+              className="w-[170px] mb-3 rounded-full"
+              src={blackimage3}
+              alt="team member3"
+            />
+            <h2 className="font-bold"> Linda Chukwu</h2>
+            <p className="text-xs">Designer</p>
+          </div>
+          <div className="text-center">
+            <img
+              className="w-[170px] mb-3 rounded-full"
+              src={blackimage4}
+              alt="team member4"
+            />
+            <h2 className="font-bold"> Emmanuel Johnson</h2>
+            <p className="text-xs">Sales Manager</p>
           </div>
         </div>
-        <div>
-          <h1 className=" bg-[#04684C] py-2.5 px-5 w-fit mb-2.5 rounded-md text-white font-bold">
-            For Investors
-          </h1>
-          <div className="border border-gray-300 rounded-md p-5 mb-5 flex justify-center items-center gap-5 w-[500px]">
-            <span className="bg-[#04684C] px-5 py-2.5 rounded-md text-white font-bold">
-              1
-            </span>
-            <div>
-              <h2 className="font-bold text-xm text-[#04684C]">
-                Browse Opportunities
-              </h2>
-              <p className=" text-gray-700">
-                Explore vetted funding requests from businesses across various
-                industries and sizes.
-              </p>
-            </div>
-          </div>
-
-          <div className="border border-gray-300 rounded-md p-5 mb-5 flex justify-center items-center gap-5 w-[500px]">
-            <span className="bg-[#04684C] px-5 py-2.5 rounded-md text-white font-bold">
-              2
-            </span>
-            <div>
-              <h2 className="font-bold text-xm text-[#04684C]">
-                Due Diligence
-              </h2>
-              <p className=" text-gray-700">
-                Review business details, financials, and communicate directly
-                with founders before investing.
-              </p>
-            </div>
-          </div>
-
-          <div className="border border-gray-300 rounded-md p-5 mb-5 flex justify-center items-center gap-5 w-[500px]">
-            <span className="bg-[#04684C] px-5 py-2.5 rounded-md text-white font-bold">
-              3
-            </span>
-            <div>
-              <h2 className="font-bold text-xm text-[#04684C]">
-                Invest & Earn
-              </h2>
-              <p className=" text-gray-700">
-                Fund promising businesses and earn competitive returns based on
-                agreed interest rates.
-              </p>
-            </div>
-          </div>
+        <div className="flex flex-col justify-center items-center mt-10">
+          <h2 className="text-4xl font-bold mb-2 text-center text-[#04684C]">
+            Check this out
+          </h2>
+          <p className="text-center">
+            Learn about the popular real estate market around
+          </p>
         </div>
-      </div>
-    </section>
+        <div className="mx-auto  text-center">
+          <ul className="flex flex-wrap justify-center items-center gap-3">
+            <li className="rounded-4xl border-solid border-2 border-[#04684C] bg-white py-2.5 px-4 cursor-pointer ">
+              The Villages, FL real estate
+            </li>
+            <li className="rounded-4xl border-solid border-2 border-[#04684C] bg-white py-2.5 px-4 cursor-pointer ">
+              Naples, FL real estate
+            </li>
+            <li className="rounded-4xl border-solid border-2 border-[#04684C] bg-white py-2.5 px-4 cursor-pointer ">
+              Orlando, FL real estate
+            </li>
+            <li className="rounded-4xl border-solid border-2 border-[#04684C bg-white py-2.5 px-4 cursor-pointer ">
+              Tampa, FL real estate
+            </li>
+            <li className="rounded-4xl border-solid border-2 border-[#04684C] bg-white py-2.5 px-4 cursor-pointer ">
+              Henderson, NV real estate
+            </li>
+            <li className="rounded-4xl border-solid border-2 border-[#04684C] bg-white py-2.5 px-4 cursor-pointer ">
+              Chandler, AZ real estate
+            </li>
+            <li className="rounded-4xl border-solid border-2 border-[#04684C] bg-white py-2.5 px-4 cursor-pointer ">
+              Scottsdale, AZ real estate
+            </li>
+            <li className="rounded-4xl border-solid border-2 border-[#04684C] bg-white py-2.5 px-4 cursor-pointer ">
+              Fort Myers, FL real estate
+            </li>
+            <li className="rounded-4xl border-solid border-2 border-[#04684C] bg-white py-2.5 px-4 cursor-pointer ">
+              Phoenix, AZ real estate
+            </li>
+          </ul>
+        </div>
+      </section>
+    </Fade>
   );
 };
 

@@ -99,18 +99,28 @@ const Services = () => {
                 {funding.businessName}
               </h2>
               <p className="text-gray-600">{funding.industry}</p>
-              <p className="mt-2">{funding.businessAddress}</p>
+              <p>{funding.businessAddress}</p>
 
-              <div className="mt-4 flex justify-between">
-                <span className="font-semibold">
-                  Amount: {funding.fundingAmount}
-                </span>
-                <span className="font-semibold">
-                  Rate: {funding.interestRate}
-                </span>
-                <span className="font-semibold">
-                  Duration: {funding.loanDuration}
-                </span>
+              <div className="mt-5">
+                <p>{funding.businessDescription}</p>
+              </div>
+
+              <div className="mt-4 flex justify-between font-semibold">
+                <div className="flex flex-col">
+                  <h1>Amount:</h1>
+                  <span className="font-semibold">{funding.fundingAmount}</span>
+                </div>
+
+                <div className="flex flex-col font-semibold">
+                  <h1>Rate:</h1>
+                  <span className="font-semibold">{funding.interestRate}</span>
+                </div>
+
+                <div className="flex flex-col font-semibold">
+                  <h1>Duration:</h1>
+                  <span className="font-semibold">{funding.loanDuration}</span>
+                </div>
+
                 <h1 className="bg-[#04684C] p-2 text-white font-bold absolute top-5 right-3 rounded-md text-sm">
                   Funding
                 </h1>
