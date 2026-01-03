@@ -10,15 +10,23 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@cometchat/calls-sdk-javascript": "^4.2.1",
+    "@cometchat/chat-sdk-javascript": "^4.1.5",
+    "@cometchat/chat-uikit-react": "^6.3.6",
     "@emotion/react": "^11.14.0",
     "@tailwindcss/vite": "^4.1.17",
+    "@talkjs/core": "^1.6.0",
+    "@talkjs/react": "^0.1.11",
+    "@talkjs/react-components": "^0.0.32",
     "firebase": "^12.7.0",
     "lucide-react": "^0.562.0",
     "react": "^19.2.0",
     "react-awesome-reveal": "^4.3.1",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.11.0",
+    "stream-chat": "^9.27.2",
     "tailwindcss": "^4.1.17",
+    "talkjs": "^0.42.1",
     "yup": "^1.7.1"
   },
   "devDependencies": {

@@ -6,6 +6,7 @@ import Featured from "../../Component/Featured";
 import KnowHow from "../KnowHow";
 import Team from "../Team";
 import InterestCalculator from "../InterestCalculator";
+
 const Home = () => {
   return (
     <>

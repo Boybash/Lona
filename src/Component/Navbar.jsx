@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Lonalogo from "../assets/Lona Logo.png";
+import mailicon from "../assets/icons8-mail-50.png";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../Firebase";
+import { dataBase } from "../../Firebase";
+import { doc, getDoc } from "firebase/firestore";
 const Navbar = () => {
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const [user, setUser] = useState(null);
 
   function handleSignInClick() {
     navigate("/signin");
   }
+
+  function handleProfileClick() {
+    navigate("/profile");
+  }
+
   function handleHomeClick() {
     navigate("/");
   }
@@ -14,6 +25,30 @@ const Navbar = () => {
   function handleFundingFormNavigate() {
     navigate("/fundingform");
   }
+
+  const fetchUserdata = async () => {
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const docRef = doc(dataBase, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          setUser(userData.surname);
+        }
+      }
+    });
+  };
+
+  useEffect(() => {
+    fetchUserdata();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setIsLoggedIn(user !== null);
+    });
+    return unsubscribe;
+  }, []);
 
   return (
     <>
@@ -36,13 +71,24 @@ const Navbar = () => {
           <li className="cursor-pointer">Help</li>
         </ul>
 
-        <div className="flex justify-center gap-5">
+        <div className="flex justify-center">
           <button
             onClick={handleSignInClick}
-            className="bg-white border-2 py-2 px-5 rounded-md cursor-pointer text-[#04684C] font-bold font-montserat"
+            className={` ${
+              isLoggedIn ? "hidden" : ""
+            }bg-white border-2 py-2 px-5 rounded-md cursor-pointer text-[#04684C] font-bold font-montserat`}
           >
             Sign In
           </button>
+          <div
+            onClick={handleProfileClick}
+            className={`${
+              isLoggedIn ? "block" : "hidden"
+            } bg-white p-1.5 rounded-md cursor-pointer text-[#04684C] font-semibold font-montserat text-center text-xs`}
+          >
+            <h5>Welcome,</h5>
+            <span>{user}</span>
+          </div>
         </div>
       </nav>
     </>

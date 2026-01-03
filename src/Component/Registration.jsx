@@ -20,11 +20,11 @@ const Registration = () => {
   const [closeModal, setCloseModal] = useState("");
   const [signupFormData, setSignupFormData] = useState({
     image: "",
-    fullname: "",
+    othernames: "",
     email: "",
     number: "",
     status: "",
-    occupation: "",
+    surname: "",
     password: "",
     gender: "",
     confirmpassword: "",
@@ -82,7 +82,7 @@ const Registration = () => {
       image: "",
       othernames: "",
       email: "",
-      number: "",
+      number: "+234",
       status: "",
       surname: "",
       password: "",
@@ -109,12 +109,12 @@ const Registration = () => {
       if (user) {
         try {
           await setDoc(doc(dataBase, "users", user.uid), {
-            othernames: signupFormData.fullname,
+            othernames: signupFormData.othernames,
             email: signupFormData.email,
             image: signupFormData.image,
             number: signupFormData.number,
             status: signupFormData.status,
-            surname: signupFormData.occupation,
+            surname: signupFormData.surname,
             gender: signupFormData.gender,
             password: signupFormData.password,
           });
@@ -261,7 +261,7 @@ const Registration = () => {
                   className="w-full p-4 outline-0 bg-white rounded-2xl mt-5"
                   name="number"
                   type="text"
-                  placeholder="PHONE NUMBER"
+                  placeholder="PHONE NUMBER (8145679843)"
                   value={signupFormData.number}
                 />
                 {errorMessages.number && (

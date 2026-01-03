@@ -62,22 +62,17 @@ const Profile = () => {
             </div>
 
             <div className="bg-[#1F4B43] text-white text-base lg:text-lg flex flex-col gap-3 lg:gap-5 justify-center items-start p-8 rounded-b-md md:rounded-bl-none md:rounded-r-md w-full lg:w-1/2 min-h-[300px]">
-              <h2 className="text-center w-full">
-                Fullname: {userDetails.fullname}
+              <h2 className="text-left w-full">
+                Surname: {userDetails.surname}
               </h2>
-              <h2 className="text-center w-full">Email: {userDetails.email}</h2>
-              <h2 className="text-center w-full">
-                Number: {userDetails.number}
+              <h2 className="text-left w-full">
+                Othernames: {userDetails.othernames}
               </h2>
-              <h2 className="text-center w-full">
-                Occupation: {userDetails.occupation}
-              </h2>
-              <h2 className="text-center w-full">
-                Gender: {userDetails.gender}
-              </h2>
-              <h2 className="text-center w-full">
-                Status: {userDetails.status}
-              </h2>
+              <h2 className="text-left w-full">Email: {userDetails.email}</h2>
+              <h2 className="text-left w-full">Number: {userDetails.number}</h2>
+
+              <h2 className="text-left w-full">Gender: {userDetails.gender}</h2>
+              <h2 className="text-left w-full">Status: {userDetails.status}</h2>
 
               <div className="flex flex-col justify-center items-center gap-3 mt-4 w-full max-w-xs mx-auto">
                 {userStatus ? (

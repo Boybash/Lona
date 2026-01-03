@@ -8,9 +8,9 @@ const Featured = () => {
     <>
       <section className="flex flex-col font-montserat px-10 py-10 gap-5 w-full">
         <div className="flex flex-col justify-center items-center mt-5">
-          <h1 className="uppercase bg-[#04684C] p-3 rounded-md text-sm text-white text-center w-fit font-bold">
+          {/* <h1 className="uppercase bg-[#04684C] p-3 rounded-md text-sm text-white text-center w-fit font-bold">
             Services
-          </h1>
+          </h1> */}
           <h1 className="uppercase text-[#04684C] text-4xl font-bold mt-5 w-[500px] text-center">
             Can help you achieve financial success
           </h1>

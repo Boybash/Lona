@@ -22,7 +22,7 @@ export default function InterestCalculator() {
   };
 
   return (
-    <div className="bg-white flex justify-center gap-52 items-center  overflow-hidden w-full font-montserat  mx-auto">
+    <div className="bg-white flex justify-center gap-52 items-center  p-5 overflow-hidden w-full font-montserat  mx-auto">
       <div className="w-[450px]">
         <h1 className=" text-[#04684C] text-4xl font-bold mt-2.5 ">
           Calculate Your Returns

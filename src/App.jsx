@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import Navbar from "./Component/Navbar";
 import React from "react";
@@ -10,6 +11,7 @@ import Registration from "./Component/Registration";
 import Profile from "./Component/Profile";
 import FundingForm from "./Component/FundingForm";
 import FundingDetails from "./Component/FundingDetails";
+
 function App() {
   return (
     <>
