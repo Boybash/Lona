@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { dataBase } from "../../Firebase";
 import { useNavigate } from "react-router-dom";
-
 import {
   collection,
   addDoc,
@@ -11,8 +10,15 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
+import { SearchContext } from "./SearchContext";
+import { useContext } from "react";
+
 const Services = () => {
+  const { searchTerm } = useContext(SearchContext);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [activeFilter, setActiveFilter] = useState("All");
   const navigate = useNavigate();
+  const itemsPerPage = 6;
   const [Fundings, setFundings] = useState([]);
 
   useEffect(() => {
@@ -28,6 +34,40 @@ const Services = () => {
     };
     fetchFundings();
   }, []);
+
+  const typeFilteredFundings = Fundings.filter((funding) => {
+    if (activeFilter === "All") {
+      return true;
+    }
+    return funding.industry === activeFilter;
+  });
+
+  const searchFilteredFundings = typeFilteredFundings.filter((funding) => {
+    const fundingData =
+      `${funding.businessName} ${funding.businessAddress} ${funding.industry} ${funding.fundingAmount} ${funding.interestRate} ${funding.loanDuration} ${funding.loanDuration}`.toLowerCase();
+    return fundingData.includes(searchTerm.toLowerCase());
+  });
+
+  const itemsToPaginate = searchFilteredFundings;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = itemsToPaginate.slice(indexOfFirstItem, indexOfLastItem);
+
+  function handleNextPage() {
+    if (currentPage < Math.ceil(itemsToPaginate.length / itemsPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
+
+  function handlePreviousPage() {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, activeFilter]);
 
   function handleInvestNow(fundingId) {
     navigate(`/fundingdetails/${fundingId}`);
@@ -90,7 +130,7 @@ const Services = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center mx-auto max-w-7xl w-full my-10 px-4">
-          {Fundings.map((funding) => (
+          {currentItems.map((funding) => (
             <div
               key={funding.id}
               className="border border-gray-300 rounded-md p-5 mb-5 relative shadow-md hover:shadow-lg transition-shadow duration-300 "
@@ -138,6 +178,28 @@ const Services = () => {
               </button>
             </div>
           ))}
+        </div>
+        <div className="flex flex-wrap gap-5 mt-5 max-[600px]:flex-col">
+          <button
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+            className={`flex justify-center items-center gap-1 mb-10 bg-[#04684C] py-2 px-4 w-[200px] mx-auto rounded-4xl cursor-pointer max-[600px]:mb-2 ${
+              currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+          >
+            Previous
+          </button>
+          <button
+            onClick={handleNextPage}
+            disabled={indexOfLastItem >= itemsToPaginate.length}
+            className={`flex justify-center items-center gap-1 mb-10 bg-[#04684C] py-2 px-4 w-[200px] mx-auto rounded-4xl cursor-pointer ${
+              indexOfLastItem >= itemsToPaginate.length
+                ? "opacity-50 cursor-not-allowed"
+                : ""
+            }`}
+          >
+            Next
+          </button>
         </div>
       </section>
     </>

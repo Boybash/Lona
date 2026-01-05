@@ -14,8 +14,6 @@ const FundingDetails = () => {
   const [fundingDetails, setFundingDetails] = useState();
   const [currentUserId, setCurrentUserId] = useState(null);
   const [closeModal, setCloseModal] = useState("");
-  const [booking, setBooking] = useState(false);
-  const [isVerify, setIsVerifying] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [isloggedIn, setIsLoggedIn] = useState(null);
   const [updatedFundingDetails, setUpdatedFundingDetails] = useState({});
@@ -62,7 +60,7 @@ const FundingDetails = () => {
         if (docSnap.exists()) {
           const userData = docSnap.data();
           setUserDetails(userData);
-          setUserStatus(userData.status === "BUSINESS OWNER");
+          setUserStatus(userData.status === "CLIENT");
         } else {
         }
       } else {
@@ -131,6 +129,8 @@ const FundingDetails = () => {
     currentUserId &&
     fundingDetails &&
     currentUserId === fundingDetails.creatorId;
+
+  const isDisabled = !isloggedIn || !userStatus;
 
   return (
     <>
@@ -251,7 +251,7 @@ const FundingDetails = () => {
                         </div>
 
                         <div className="flex flex-col">
-                          <p className="font-bold">Industry:</p>
+                          <p className="font-bold text-center">Industry:</p>
                           <span className="text-sm text-center text-white">
                             {fundingDetails.industry}{" "}
                           </span>
@@ -282,14 +282,14 @@ const FundingDetails = () => {
                           </div>
 
                           <div className="flex flex-col">
-                            <p>Interest Rate: </p>
+                            <p className="font-bold">Interest Rate: </p>
                             <span className="text-sm text-center text-white">
                               {fundingDetails.interestRate}%
                             </span>
                           </div>
 
                           <div className="flex flex-col">
-                            <p>Loan Duration: </p>
+                            <p className="font-bold">Loan Duration: </p>
                             <span className="text-sm text-center text-white">
                               {fundingDetails.loanDuration}
                             </span>
@@ -308,28 +308,28 @@ const FundingDetails = () => {
                     </div>
                     <WhatsAppChat />
 
-                    <div className="flex flex-col items-center mt-3">
-                      <span className="flex justify-center items-center w-[500px] mb-5">
+                    <hr className="text-white mt-5"></hr>
+
+                    <div className="flex flex-col items-center mt-5">
+                      <span className="flex justify-center gap-2 items-center w-[500px] mb-5">
                         <input
                           type="checkbox"
                           name="agreeToTerms"
                           // checked={signupFormData.agreeToTerms} // Boolean: true or false
                           // onChange={handleCheckboxChange}
-                          className="w-5 h-5 accent-blue-600"
+                          className="w-8 h-5 accent-blue-600"
                         />
-                        <label className="text-sm font-medium text-gray-700">
+                        <label className="text-sm font-medium text-gray-300">
                           "I confirm that I have reviewed the Scope of Work and
-                          agree to the Service Terms as discussed with
+                          agree to the Service Terms as discussed with{" "}
                           {fundingDetails.businessName}."
                         </label>
                       </span>
                       <button
-                        disabled={!isloggedIn || userStatus}
+                        disabled={isDisabled}
                         onClick={handleShowModal}
                         className={`${
-                          !isloggedIn
-                            ? "opacity-50 cursor-not-allowed"
-                            : "block"
+                          isDisabled ? "opacity-50 cursor-not-allowed" : "block"
                         } bg-white border-2 py-2 px-5 rounded-md cursor-pointer text-[#04684C] font-bold font-montserat`}
                       >
                         Agreement Reached

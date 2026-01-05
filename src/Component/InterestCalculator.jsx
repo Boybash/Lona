@@ -112,7 +112,7 @@ export default function InterestCalculator() {
             <input
               type="range"
               min="1"
-              max="40"
+              max="100"
               step="0.5"
               value={rate}
               onChange={(e) => setRate(Number(e.target.value))}

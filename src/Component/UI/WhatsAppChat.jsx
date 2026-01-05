@@ -3,7 +3,7 @@ import { dataBase } from "../../../Firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-
+import WhatsappLogo from "../../assets/whatsapp_3992558.png";
 const WhatsAppChat = () => {
   const location = useLocation();
   const [userPhoneNumber, setUserPhoneNumber] = useState(null);
@@ -59,8 +59,11 @@ const WhatsAppChat = () => {
       target="_blank"
       rel="noopener noreferrer"
       style={buttonStyle}
+      className="animate-bounce"
     >
-      <span style={{ marginRight: "10px" }}>💬</span>
+      <span style={{ marginRight: "10px" }}>
+        <img className="w-7" src={WhatsappLogo} alt="whatsapp" />
+      </span>
       Chat with the Business Owner
     </a>
   );

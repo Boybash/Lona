@@ -1,6 +1,25 @@
 import React from "react";
 import uparrow from "../assets/Right Button.png";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useState } from "react";
+import { auth } from "../../Firebase";
+import { dataBase } from "../../Firebase";
+import { doc, getDoc } from "firebase/firestore";
 const Hero = () => {
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
+
+  function handleSignInClick() {
+    navigate("/signin");
+  }
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setIsLoggedIn(user !== null);
+    });
+    return unsubscribe;
+  }, []);
+
   return (
     <>
       <section
@@ -33,15 +52,26 @@ const Hero = () => {
           </div>
 
           <div className="relative">
-            <button className="bg-[#04684C] text-white rounded-md py-3 px-5 w-[200px] font-bold relative cursor-pointer">
-              Get Started
-            </button>
-            <img
-              className=" w-10 absolute right-0 left-0.5 top-1"
-              src={uparrow}
-              alt="arrow"
-            />
-            <button></button>
+            <div className={`${isLoggedIn ? "hidden" : "block"}`}>
+              <button
+                onClick={handleSignInClick}
+                className="bg-[#04684C] text-white rounded-md py-3 px-5 w-[200px] font-bold relative cursor-pointer"
+              >
+                Get Started
+              </button>
+              <img
+                className=" w-10 absolute right-0 left-0.5 top-1"
+                src={uparrow}
+                alt="arrow"
+              />
+            </div>
+            <h1
+              className={`${
+                isLoggedIn ? "block" : "hidden"
+              } bg-[#04684C] text-white text-center rounded-md py-3 px-5 w-[200px] font-bold relative cursor-pointer`}
+            >
+              Ready To Boost Your Finances
+            </h1>
           </div>
         </div>
       </section>
