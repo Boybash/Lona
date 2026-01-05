@@ -6,4 +6,5 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   plugins: [react()],
   plugins: [tailwindcss()],
+  plugins: [require("@tailwindcss/forms")],
 });

@@ -9,6 +9,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [user, setUser] = useState(null);
+  const [userImage, setuserImage] = useState(null);
 
   function handleSignInClick() {
     navigate("/signin");
@@ -34,6 +35,7 @@ const Navbar = () => {
         if (docSnap.exists()) {
           const userData = docSnap.data();
           setUser(userData.surname);
+          setuserImage(userData.image);
         }
       }
     });
@@ -52,7 +54,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-[#04684C] flex justify-between items-center w-full h-15 px-10 py-10">
+      <nav className="sticky z-50 left-0 right-0 bottom-0 top-0 bg-[#04684C] flex justify-between items-center w-full h-15 px-10 py-10">
         <div>
           <img
             onClick={handleHomeClick}
@@ -84,10 +86,13 @@ const Navbar = () => {
             onClick={handleProfileClick}
             className={`${
               isLoggedIn ? "block" : "hidden"
-            } bg-white p-1.5 rounded-md cursor-pointer text-[#04684C] font-semibold font-montserat text-center text-xs`}
+            } flex justify-center items-center gap-2 bg-white p-1.5 rounded-md cursor-pointer text-[#04684C] font-semibold font-montserat text-xs`}
           >
-            <h5>Welcome,</h5>
-            <span>{user}</span>
+            <img className="w-5 rounded-full" src={userImage} alt="userImage" />
+            <div>
+              <h5>Welcome,</h5>
+              <span>{user}</span>
+            </div>
           </div>
         </div>
       </nav>

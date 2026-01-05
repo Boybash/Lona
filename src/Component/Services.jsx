@@ -1,25 +1,43 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect, useContext, Fragment } from "react";
 import { dataBase } from "../../Firebase";
 import { useNavigate } from "react-router-dom";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  deleteDoc,
-  doc,
-  updateDoc,
-} from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { SearchContext } from "./SearchContext";
-import { useContext } from "react";
+import CustomSelect from "./CustomSelect";
 
 const Services = () => {
-  const { searchTerm } = useContext(SearchContext);
+  const { searchTerm, setSearchTerm } = useContext(SearchContext);
   const [currentPage, setCurrentPage] = useState(1);
-  const [activeFilter, setActiveFilter] = useState("All");
+  const [Fundings, setFundings] = useState([]);
+
+  const [industry, setIndustry] = useState("All Industries");
+  const [duration, setDuration] = useState("All Durations");
+  const [status, setStatus] = useState("All Status");
+
   const navigate = useNavigate();
   const itemsPerPage = 6;
-  const [Fundings, setFundings] = useState([]);
+
+  const industries = [
+    "All Industries",
+    "Professional Services",
+    "Food & Beverages",
+    "Transportation",
+    "Real Estate",
+    "Manufacturing",
+    "Technology",
+    "Healthcare",
+    "Finance",
+    "Retail",
+  ];
+  const durations = [
+    "All Durations",
+    "6 Months",
+    "1 Year",
+    "2 Years",
+    "3 Years",
+    "5 Years",
+  ];
+  const statuses = ["All Status", "Funding", "Active", "Completed"];
 
   useEffect(() => {
     const fetchFundings = async () => {
@@ -35,174 +53,194 @@ const Services = () => {
     fetchFundings();
   }, []);
 
-  const typeFilteredFundings = Fundings.filter((funding) => {
-    if (activeFilter === "All") {
-      return true;
-    }
-    return funding.industry === activeFilter;
+  const filteredFundings = Fundings.filter((funding) => {
+    const matchesIndustry =
+      industry === "All Industries" || funding.industry === industry;
+    const matchesStatus = status === "All Status" || funding.status === status;
+    const matchesDuration =
+      duration === "All Durations" || funding.loanDuration === duration;
+
+    const combinedData =
+      `${funding.businessName} ${funding.businessAddress} ${funding.industry}`.toLowerCase();
+    const matchesSearch = combinedData.includes(searchTerm.toLowerCase());
+
+    return matchesIndustry && matchesStatus && matchesDuration && matchesSearch;
   });
 
-  const searchFilteredFundings = typeFilteredFundings.filter((funding) => {
-    const fundingData =
-      `${funding.businessName} ${funding.businessAddress} ${funding.industry} ${funding.fundingAmount} ${funding.interestRate} ${funding.loanDuration} ${funding.loanDuration}`.toLowerCase();
-    return fundingData.includes(searchTerm.toLowerCase());
-  });
-
-  const itemsToPaginate = searchFilteredFundings;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = itemsToPaginate.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredFundings.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
-  function handleNextPage() {
-    if (currentPage < Math.ceil(itemsToPaginate.length / itemsPerPage)) {
+  const handleNextPage = () => {
+    if (currentPage < Math.ceil(filteredFundings.length / itemsPerPage)) {
       setCurrentPage(currentPage + 1);
     }
-  }
+  };
 
-  function handlePreviousPage() {
+  const handlePreviousPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
-  }
+  };
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchTerm, activeFilter]);
+  }, [searchTerm, industry, duration, status]);
 
-  function handleInvestNow(fundingId) {
+  const handleInvestNow = (fundingId) => {
     navigate(`/fundingdetails/${fundingId}`);
-  }
+  };
+
   return (
-    <>
-      <section className="flex flex-col  bg-[] font-montserat px-10 py-10 gap-5 w-full">
-        <div className="flex flex-col mt-3">
-          <h1 className="text-[#04684C] text-3xl font-bold">
-            Investment Opportunities
-          </h1>
-          <span className="text-gray-700">
-            Browse funding requests from vetted businesses
-          </span>
+    <section className="flex flex-col font-montserat px-10 py-10 gap-5 w-full">
+      <div className="flex flex-col mt-3">
+        <h1 className="text-[#04684C] text-3xl font-bold">
+          Investment Opportunities
+        </h1>
+        <span className="text-gray-700">
+          Browse funding requests from vetted businesses
+        </span>
+      </div>
+
+      <div className="flex flex-wrap lg:flex-nowrap justify-between items-end py-10 px-10 bg-[#04684C] rounded-md shadow-md w-full gap-6">
+        <div className="w-full lg:flex-1">
+          <label className="font-bold text-white text-sm">Search</label>
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search for investment opportunities"
+            className="bg-white rounded-md p-2 w-full mt-2.5 outline-0 h-[40px] text-sm"
+          />
         </div>
 
-        <div className=" flex justify-between items-center py-10 px-10 bg-[#04684C] rounded-md shadow-md w-full">
-          <div>
-            <label className="font-bold text-white text-sm">Search</label>
-            <input
-              type="text"
-              placeholder="Search for investment opportunities"
-              className="bg-white rounded-md p-2 w-full mt-2.5 outline-0"
-            />
-          </div>
-          <div>
-            <label className="font-bold text-white text-sm">Industry</label>
-            <select className="bg-white rounded-md p-2 w-full mt-2.5 outline-0">
-              <option>All Industries</option>
-              <option>Professional Services</option>
-              <option>Foond & Beverages</option>
-              <option>Transportation</option>
-              <option>Real estate</option>
-              <option>Manufacturing</option>
-              <option>Technology</option>
-              <option>Healthcare</option>
-              <option>Finance</option>
-              <option>Retail</option>
-            </select>
-          </div>
-          <div>
-            <label className="font-bold text-white text-sm">Duration</label>
-            <select className="bg-white rounded-md p-2 w-full mt-2.5 outline-0">
-              <option>6 Months</option>
-              <option>1 Year</option>
-              <option>2 Years</option>
-              <option>3 Years</option>
-              <option>5 Years</option>
-            </select>
-          </div>
-          <div>
-            <label className="font-bold text-white text-sm">Status</label>
-            <select className="bg-white rounded-md p-2 w-full mt-2.5 outline-0">
-              <option>All Status</option>
-              <option>Funding</option>
-              <option>Active</option>
-              <option>Completed</option>
-            </select>
-          </div>
-        </div>
+        <CustomSelect
+          label="Industry"
+          options={industries}
+          selected={industry}
+          setSelected={setIndustry}
+        />
+        <CustomSelect
+          label="Duration"
+          options={durations}
+          selected={duration}
+          setSelected={setDuration}
+        />
+        <CustomSelect
+          label="Status"
+          options={statuses}
+          selected={status}
+          setSelected={setStatus}
+        />
+      </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center mx-auto max-w-7xl w-full my-10 px-4">
-          {currentItems.map((funding) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center mx-auto max-w-7xl w-full my-10 px-4">
+        {currentItems.length > 0 ? (
+          currentItems.map((funding) => (
             <div
               key={funding.id}
-              className="border border-gray-300 rounded-md p-5 mb-5 relative shadow-md hover:shadow-lg transition-shadow duration-300 "
+              className="border border-gray-300 rounded-md p-5 relative shadow-md hover:shadow-lg transition-shadow duration-300 w-full bg-white"
             >
-              <h2 className="text-xl font-bold text-[#04684C] w-50">
+              <h2 className="text-xl font-bold text-[#04684C] pr-10 truncate w-[250px]">
                 {funding.businessName}
               </h2>
-              <p className="text-gray-600">{funding.industry}</p>
-              <p>{funding.businessAddress}</p>
+              <p className="text-gray-600 text-sm italic">{funding.industry}</p>
+              <p className="text-xs text-gray-500">{funding.businessAddress}</p>
 
-              <div className="mt-5">
-                <p>{funding.businessDescription}</p>
+              <div className="mt-5 h-5  overflow-hidden text-sm">
+                <p className="line-clamp-3">{funding.businessDescription}</p>
               </div>
 
-              <div className="mt-4 flex justify-between font-semibold">
+              <div className="mt-4 flex justify-between items-end border-t pt-4">
                 <div className="flex flex-col">
-                  <h1>Amount:</h1>
-                  <span className="font-semibold">{funding.fundingAmount}</span>
+                  <span className="text-[10px] uppercase text-gray-400 text-center">
+                    Amount
+                  </span>
+                  <span className="font-bold text-[#04684C]">
+                    #{funding.fundingAmount}
+                  </span>
                 </div>
-
-                <div className="flex flex-col font-semibold">
-                  <h1>Rate:</h1>
-                  <span className="font-semibold">{funding.interestRate}</span>
+                <div className="flex flex-col">
+                  <span className="text-[10px] uppercase text-gray-400 text-center">
+                    Rate
+                  </span>
+                  <span className="font-bold text-[#04684C]">
+                    {funding.interestRate}% APR
+                  </span>
                 </div>
-
-                <div className="flex flex-col font-semibold">
-                  <h1>Duration:</h1>
-                  <span className="font-semibold">{funding.loanDuration}</span>
+                <div className="flex flex-col">
+                  <span className="text-[10px] uppercase text-gray-400 text-center">
+                    Duration
+                  </span>
+                  <span className="font-bold text-[#04684C]">
+                    {funding.loanDuration}
+                  </span>
                 </div>
-
-                <h1 className="bg-[#04684C] p-2 text-white font-bold absolute top-5 right-3 rounded-md text-sm">
-                  Funding
-                </h1>
-                <h1 className="bg-[#04684C] p-2 text-amber-300 font-bold absolute top-5 right-23 rounded-md text-sm">
-                  Active
-                </h1>
               </div>
+
+              <span className="absolute top-5 right-3 bg-[#04684C] text-white text-[10px] font-bold px-2 py-1 rounded">
+                {funding.status || "Funding"}
+              </span>
+
               <button
-                onClick={() => {
-                  handleInvestNow(funding.id);
-                }}
-                className=" font-bold mt-4 w-full bg-[#04684C] text-white py-2 px-4 rounded-md cursor-pointer hover:bg-[#035d3f]"
+                onClick={() => handleInvestNow(funding.id)}
+                className="font-bold mt-6 w-full bg-[#04684C] text-white py-2 px-4 rounded-md hover:bg-[#035d3f] transition-colors"
               >
                 Invest Now
               </button>
             </div>
-          ))}
-        </div>
-        <div className="flex flex-wrap gap-5 mt-5 max-[600px]:flex-col">
+          ))
+        ) : (
+          <div className="col-span-full py-20 text-center">
+            <h2 className="text-2xl font-bold text-gray-400">
+              No investment opportunities match your filters.
+            </h2>
+            <button
+              onClick={() => {
+                setSearchTerm("");
+                setIndustry("All Industries");
+                setStatus("All Status");
+                setDuration("All Duration");
+              }}
+              className="text-[#04684C] underline mt-2 cursor-pointer"
+            >
+              Clear all filters
+            </button>
+          </div>
+        )}
+      </div>
+
+      {filteredFundings.length > itemsPerPage && (
+        <div className="flex justify-center items-center gap-4 mt-5">
           <button
             onClick={handlePreviousPage}
             disabled={currentPage === 1}
-            className={`flex justify-center items-center gap-1 mb-10 bg-[#04684C] py-2 px-4 w-[200px] mx-auto rounded-4xl cursor-pointer max-[600px]:mb-2 ${
-              currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
+            className={`bg-[#04684C] text-white py-2 px-8 rounded-md ${
+              currentPage === 1
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:bg-[#035d3f]"
             }`}
           >
             Previous
           </button>
+          <span className="font-bold text-[#04684C]">Page {currentPage}</span>
           <button
             onClick={handleNextPage}
-            disabled={indexOfLastItem >= itemsToPaginate.length}
-            className={`flex justify-center items-center gap-1 mb-10 bg-[#04684C] py-2 px-4 w-[200px] mx-auto rounded-4xl cursor-pointer ${
-              indexOfLastItem >= itemsToPaginate.length
+            disabled={indexOfLastItem >= filteredFundings.length}
+            className={`bg-[#04684C] text-white py-2 px-8 rounded-md ${
+              indexOfLastItem >= filteredFundings.length
                 ? "opacity-50 cursor-not-allowed"
-                : ""
+                : "hover:bg-[#035d3f]"
             }`}
           >
             Next
           </button>
         </div>
-      </section>
-    </>
+      )}
+    </section>
   );
 };
 
