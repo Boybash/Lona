@@ -8,8 +8,8 @@ const Team = () => {
   return (
     <Fade>
       <section className=" mx-auto p-20 w-full flex flex-col gap-10 font-montserat max-[600px]:px-5">
-        <div className="flex flex-col justify-center items-center">
-          <h2 className="text-4xl font-bold mb-2 text-[#04684C]">
+        <div className="flex flex-col justify-center items-center max-[500px]:text-center">
+          <h2 className="text-4xl font-bold mb-2 text-[#04684C] max-[500px]:text-center">
             Meet Our Team of Expert
           </h2>
           <p>We are good at what we do</p>
@@ -49,7 +49,7 @@ const Team = () => {
               alt="team member4"
             />
             <h2 className="font-bold"> Emmanuel Johnson</h2>
-            <p className="text-xs">Sales Manager</p>
+            <p className="text-xs">Loan Manager</p>
           </div>
         </div>
         <div className="flex flex-col justify-center items-center mt-10">

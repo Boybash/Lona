@@ -52,6 +52,7 @@ const Signin = () => {
 
   async function handleLoginFormSubmit(e) {
     e.preventDefault();
+    setCloseModal("");
     try {
       await schema.validate(loginFormData, { abortEarly: false });
       const userCredential = await signInWithEmailAndPassword(
@@ -71,7 +72,9 @@ const Signin = () => {
           errors[error.path] = error.message;
         });
         setErrorMessages(errors);
+        setLoginSubmissionStatus(null);
       } else {
+        setLoginSubmissionStatus(false);
         console.error("Login Error:", err.code);
         let customMessage = "An error occurred. Please try again.";
         if (err.code === "auth/invalid-credential") {

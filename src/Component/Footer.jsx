@@ -9,7 +9,7 @@ const Footer = () => {
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 md:gap-8">
           <div className="flex flex-col gap-4 lg:col-span-1 sm:col-span-2">
-            <img className="lg:w-30 md:w-20" src={Lonalogo} alt="lonalogo" />
+            <img className="lg:w-30 md:w-10" src={Lonalogo} alt="lonalogo" />
             <p className="text-sm md:text-base opacity-90 max-w-sm">
               Connecting businesses with growth capital through transparent,
               secure peer-to-peer lending.

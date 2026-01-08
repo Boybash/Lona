@@ -86,8 +86,8 @@ const Navbar = () => {
 
         <ul
           className={` ${
-            displayClass === "active" ? "block" : "hidden"
-          }  min-[1000px]:flex flex justify-center items-center gap-10 text-white font-bold pl-25 font-montserat max-[1000px]:absolute max-[1000px]:top-20 max-[1000px]:left-0 max-[1000px]:w-full max-[1000px]:bg-[#04684C] max-[1000px]:py-5 max-[1000px]:flex-col max-[1000px]:items-center max-[1000px]:gap-5 max-[1000px]:transition-all max-[1000px]:duration-500 max-[1000px]:ease-in-out`}
+            displayClass === "active" ? "flex" : "hidden"
+          }  min-[1000px]:flex min-[1000px]:pl-25 flex justify-center items-center gap-10 text-white font-bold  font-montserat max-[1000px]:absolute max-[1000px]:top-20 max-[1000px]:left-0 max-[1000px]:right-0 max-[1000px]:w-full max-[1000px]:bg-[#04684C] max-[1000px]:py-5 max-[1000px]:flex-col max-[1000px]:items-center max-[1000px]:justify-center max-[1000px]:gap-5 max-[1000px]:transition-all max-[1000px]:duration-500 max-[1000px]:ease-in-out`}
         >
           <li onClick={scrollToFeatured} className="cursor-pointer">
             Browse Opportunities

@@ -10,10 +10,15 @@ const Introduction = () => {
   function handleFundingFormNavigate() {
     navigate("/fundingform");
   }
+
+  const scrollToFeatured = () => {
+    const skillsSection = document.getElementById("featured");
+    skillsSection.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <>
       <section className="flex flex-col font-montserat px-6 md:px-10 py-10 gap-5 w-full">
-        {/* Header Section: Removed fixed width, added max-w */}
         <div className="flex flex-col justify-center items-center gap-5 mb-10 max-w-[600px] mx-auto w-full">
           <h1 className="uppercase text-[#04684C] text-2xl md:text-4xl font-bold text-center">
             Built on Trust & Security
@@ -24,9 +29,7 @@ const Introduction = () => {
           </p>
         </div>
 
-        {/* Feature Cards: Switched to Grid for better spacing control */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto w-full">
-          {/* Card 1 */}
           <div className="flex flex-col justify-center items-center gap-3 text-center bg-[#04684C] p-8 md:p-10 rounded-xl shadow-md min-h-[250px]">
             <img className="w-12" src={safeguard} alt="safeguard" />
             <h2 className="font-bold text-white text-xl md:text-2xl">
@@ -38,7 +41,6 @@ const Introduction = () => {
             </p>
           </div>
 
-          {/* Card 2 */}
           <div className="flex flex-col justify-center items-center gap-3 text-center bg-[#04684C] p-8 md:p-10 rounded-xl shadow-md min-h-[250px]">
             <img className="w-12" src={padlock} alt="padlock" />
             <h2 className="font-bold text-white text-xl md:text-2xl">
@@ -50,7 +52,6 @@ const Introduction = () => {
             </p>
           </div>
 
-          {/* Card 3 */}
           <div className="flex flex-col justify-center items-center gap-3 text-center bg-[#04684C] p-8 md:p-10 rounded-xl shadow-md min-h-[250px]">
             <img className="w-12" src={checkmark} alt="checkmark" />
             <h2 className="font-bold text-white text-xl md:text-2xl">
@@ -63,9 +64,7 @@ const Introduction = () => {
           </div>
         </div>
 
-        {/* Bottom Action Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 max-w-5xl mx-auto w-full">
-          {/* For Businesses */}
           <div className="flex flex-col justify-center items-center gap-4 bg-[#04684C] p-8 md:p-10 rounded-xl shadow-md min-h-[280px]">
             <h2 className="font-bold text-2xl md:text-3xl text-white">
               For Businesses
@@ -82,7 +81,6 @@ const Introduction = () => {
             </button>
           </div>
 
-          {/* For Client */}
           <div className="flex flex-col gap-4 justify-center items-center bg-[#04684C] p-8 md:p-10 rounded-xl shadow-md min-h-[280px]">
             <h2 className="font-bold text-2xl md:text-3xl text-white">
               For Clients
@@ -91,7 +89,10 @@ const Introduction = () => {
               Earn attractive returns by investing in vetted businesses seeking
               growth capital.
             </p>
-            <button className="bg-white rounded-md py-3 px-6 font-bold text-[#04684C] hover:bg-gray-100 transition-colors cursor-pointer w-full sm:w-auto">
+            <button
+              onClick={scrollToFeatured}
+              className="bg-white rounded-md py-3 px-6 font-bold text-[#04684C] hover:bg-gray-100 transition-colors cursor-pointer w-full sm:w-auto"
+            >
               Check For Opportunities
             </button>
           </div>
