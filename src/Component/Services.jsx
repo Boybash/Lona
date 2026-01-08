@@ -159,7 +159,7 @@ const Services = () => {
                   <span className="text-[10px] uppercase text-gray-400 text-center">
                     Amount
                   </span>
-                  <span className="font-bold text-[#04684C]">
+                  <span className="font-bold text-[#04684C] max-[420px]:truncate w-[70px]">
                     #{funding.fundingAmount}
                   </span>
                 </div>
@@ -187,7 +187,7 @@ const Services = () => {
 
               <button
                 onClick={() => handleInvestNow(funding.id)}
-                className="font-bold mt-6 w-full bg-[#04684C] text-white py-2 px-4 rounded-md hover:bg-[#035d3f] transition-colors"
+                className="font-bold mt-6 w-full bg-[#04684C] text-white py-2 px-4 rounded-md hover:bg-[#035d3f] cursor-pointer transition-colors"
               >
                 Invest Now
               </button>

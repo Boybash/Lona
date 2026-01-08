@@ -4,6 +4,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import WhatsappLogo from "../../assets/whatsapp_3992558.png";
+import { auth } from "../../../Firebase";
 const WhatsAppChat = () => {
   const location = useLocation();
   const [userPhoneNumber, setUserPhoneNumber] = useState(null);
@@ -23,7 +24,7 @@ const WhatsAppChat = () => {
         } else {
         }
       } else {
-        setUserDetails(null);
+        setUserPhoneNumber(null);
       }
     });
   };
@@ -36,6 +37,7 @@ const WhatsAppChat = () => {
     "Hello! I have a question about your Business Funding Request.";
   const encodedMessage = encodeURIComponent(message);
   const whatsappUrl = `https://wa.me/${userPhoneNumber}?text=${encodedMessage}`;
+  console.log(whatsappUrl);
 
   const buttonStyle = {
     position: "fixed",

@@ -22,7 +22,7 @@ const Registration = () => {
     image: "",
     othernames: "",
     email: "",
-    number: "",
+    number: "+234",
     status: "",
     surname: "",
     password: "",
@@ -46,9 +46,12 @@ const Registration = () => {
     email: yup.string().email("Invalid email").required("Email is required"),
     number: yup
       .string()
-      .matches(/^[0-9]+$/, "Phone number is not valid")
+      .matches(
+        /^\+?[0-9]+$/,
+        "Phone number is not valid. Only digits and an optional '+' at the start are allowed"
+      )
       .min(10, "Phone number must be at least 10 digits")
-      .max(15, "Phone number must not exceed 15 digits")
+      .max(16, "Phone number must not exceed 15 digits plus an optional '+'")
       .required("Phone number is required"),
     status: yup.string().required("Status is required"),
     gender: yup.string().required("Status is required"),
@@ -82,7 +85,7 @@ const Registration = () => {
       image: "",
       othernames: "",
       email: "",
-      number: "+234",
+      number: "",
       status: "",
       surname: "",
       password: "",
@@ -95,44 +98,39 @@ const Registration = () => {
     e.preventDefault();
     try {
       await schema.validate(signupFormData, { abortEarly: false });
-      setSignupSubmissionStatus(true);
       setErrorMessages({});
-      resetForm();
-
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         signupFormData.email,
         signupFormData.password
       );
       const user = userCredential.user;
-
-      if (user) {
-        try {
-          await setDoc(doc(dataBase, "users", user.uid), {
-            othernames: signupFormData.othernames,
-            email: signupFormData.email,
-            image: signupFormData.image,
-            number: signupFormData.number,
-            status: signupFormData.status,
-            surname: signupFormData.surname,
-            gender: signupFormData.gender,
-            password: signupFormData.password,
-          });
-          console.log("User data stored successfully");
-        } catch (err) {
-          console.error("Error storing user data:", err);
-        }
-
-        console.log("User created:", user);
-      }
+      await setDoc(doc(dataBase, "users", user.uid), {
+        othernames: signupFormData.othernames,
+        email: signupFormData.email,
+        image: signupFormData.image,
+        number: signupFormData.number,
+        status: signupFormData.status,
+        surname: signupFormData.surname,
+        gender: signupFormData.gender,
+        createdAt: new Date(),
+      });
+      setSignupSubmissionStatus(true);
+      resetForm();
     } catch (err) {
       const errors = {};
       if (err.inner) {
         err.inner.forEach((error) => {
           errors[error.path] = error.message;
         });
+      } else if (err.code) {
+        if (err.code === "auth/email-already-in-use") {
+          errors.email = "This email is already registered.";
+        } else {
+          errors.general = err.message;
+        }
       } else {
-        errors.general = "An error occurred during signup";
+        errors.general = "An unexpected error occurred.";
       }
       setErrorMessages(errors);
       setSignupSubmissionStatus(false);
@@ -165,8 +163,8 @@ const Registration = () => {
                 placeholder="SURNAME"
                 value={signupFormData.surname}
               />
-              {errorMessages.occupation && (
-                <p className="text-red-600">{errorMessages.occupation}</p>
+              {errorMessages.surname && (
+                <p className="text-red-600">{errorMessages.surname}</p>
               )}
               <input
                 onChange={handleSignupFormChange}
@@ -176,9 +174,9 @@ const Registration = () => {
                 placeholder="OTHERNAMES"
                 value={signupFormData.othernames}
               />
-              {errorMessages.fullname && (
+              {errorMessages.othernames && (
                 <p className="text-red-400 text-sm mt-1">
-                  {errorMessages.fullname}
+                  {errorMessages.othernames}
                 </p>
               )}
 

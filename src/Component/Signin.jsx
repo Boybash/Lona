@@ -1,6 +1,7 @@
 import React from "react";
 import keyicon from "../assets/icons8-access-64.png";
 import mailicon from "../assets/icons8-mail-50.png";
+import GoogleLogo from "../assets/google.png";
 import { useState } from "react";
 import * as yup from "yup";
 import showpassword from "../assets/show eye.svg";
@@ -9,11 +10,11 @@ import lonalogo from "../assets/lona logo.png";
 import xicon from "../assets/xicon.png";
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
 import { auth } from "../../Firebase";
-import { doc, setDoc } from "firebase/firestore";
-import { dataBase } from "../../Firebase";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { provider } from "../../Firebase";
 
 const Signin = () => {
   const [showPasword, setShowPassword] = useState(false);
@@ -58,12 +59,12 @@ const Signin = () => {
         loginFormData.email,
         loginFormData.password
       );
-      const user = userCredential.user;
-      setLoginSubmissionStatus(true);
       setErrorMessages({});
+      setLoginSubmissionStatus(true);
       resetForm();
-      window.location.href = "/profile";
+      navigate("/profile");
     } catch (err) {
+      setLoginSubmissionStatus(false);
       if (err.inner) {
         const errors = {};
         err.inner.forEach((error) => {
@@ -71,12 +72,37 @@ const Signin = () => {
         });
         setErrorMessages(errors);
       } else {
-        setErrorMessages({ general: err.message });
+        console.error("Login Error:", err.code);
+        let customMessage = "An error occurred. Please try again.";
+        if (err.code === "auth/invalid-credential") {
+          customMessage = "Invalid email or password.";
+        } else if (err.code === "auth/user-not-found") {
+          customMessage = "No account found with this email.";
+        } else if (err.code === "auth/too-many-requests") {
+          customMessage = "Too many failed attempts. Try again later.";
+        }
+
+        setErrorMessages({ general: customMessage });
       }
-      setLoginSubmissionStatus(false);
-      resetForm();
     }
   }
+
+  const signInWithGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+        console.log("Signed in user:", user);
+        setLoginSubmissionStatus(true);
+        setErrorMessages({});
+        resetForm();
+        navigate("/profile");
+      })
+      .catch((error) => {
+        console.error("Error during sign-in:", error.message);
+      });
+  };
 
   function togglePasswordVisibility() {
     setShowPassword(!showPasword);
@@ -98,6 +124,12 @@ const Signin = () => {
             <div className="flex items-center justify-center gap-10">
               <img className="w-10" src={mailicon} alt="mailicon" />
               <img className="w-10" src={keyicon} alt="keyicon" />
+              <img
+                onClick={signInWithGoogle}
+                className="bg-white px-5 w-20 rounded-md cursor-pointer"
+                src={GoogleLogo}
+                alt="GoogleLogo"
+              />
             </div>
             <form
               onSubmit={handleLoginFormSubmit}

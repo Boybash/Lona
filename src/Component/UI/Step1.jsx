@@ -30,7 +30,7 @@ const Step1 = ({ data, onChange, errors }) => (
       >
         <option value="">Select Your Industry</option>
         <option>Professional Services</option>
-        <option>Foond & Beverages</option>
+        <option>Food & Beverages</option>
         <option>Transportation</option>
         <option>Real estate</option>
         <option>Manufacturing</option>

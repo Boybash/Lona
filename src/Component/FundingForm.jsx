@@ -33,10 +33,22 @@ const FundingForm = () => {
     industry: yup.string().required("Required"),
     businessDescription: yup.string().required("Required"),
     fundingAmount: yup
-      .number()
-      .typeError("Must be a number")
-      .positive()
-      .required("Required"),
+      .string()
+      .required("Required")
+      .test("is-number", "Must be a valid number", (value) => {
+        if (!value) return false;
+        // Remove all commas and check if the result is a number
+        const numberWithoutCommas = value.replace(/,/g, "");
+        return (
+          !isNaN(parseFloat(numberWithoutCommas)) &&
+          isFinite(numberWithoutCommas)
+        );
+      })
+      .test("is-positive", "Must be a positive number", (value) => {
+        if (!value) return false;
+        const numberWithoutCommas = value.replace(/,/g, "");
+        return parseFloat(numberWithoutCommas) > 0;
+      }),
     interestRate: yup
       .number()
       .typeError("Must be a number")

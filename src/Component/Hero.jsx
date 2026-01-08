@@ -13,6 +13,7 @@ const Hero = () => {
   function handleSignInClick() {
     navigate("/signin");
   }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setIsLoggedIn(user !== null);
@@ -26,56 +27,62 @@ const Hero = () => {
         className="
     bg-gradient-to-r from-[#2b5876] to-[#4e4378]
     bg-[url('https://img.freepik.com/premium-photo/top-view-cash-calculator-notepad-table_1048944-3074244.jpg?semt=ais_hybrid&w=740&q=80')] 
-    bg-cover bg-center w-full flex justify-between items-center px-10 py-20 font-montserat
+    bg-cover bg-center w-full flex flex-col md:flex-row justify-between items-center px-6 md:px-10 py-12 md:py-20 font-montserat
   "
       >
-        <div className="flex justify-around items-center w-full">
-          <div className="flex flex-col w-3/5">
-            <h1 className="uppercase bg-[#04684C] p-3 rounded-md text-sm text-white w-fit">
+        <div className="flex flex-col md:flex-row justify-around items-center w-full gap-10">
+          {/* Text Content Column */}
+          <div className="flex flex-col w-full md:w-3/5 text-center md:text-left items-center md:items-start">
+            <h1 className="uppercase bg-[#04684C] p-2 md:p-3 rounded-md text-xs md:text-sm text-white w-fit mb-4">
               100% trusted platform
             </h1>
-            <h1 className="text-7xl text-white uppercase font-extrabold">
+
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl text-white uppercase font-extrabold leading-tight">
               finance with security and{" "}
               <span className="text-[#04684C]">flexibility</span>
             </h1>
-            <ul className="w-3\5 text-white text-xl font-bold uppercase flex flex-col mt-2">
+
+            <ul className="w-full md:w-4/5 text-white text-base md:text-xl font-bold uppercase flex flex-col mt-4 gap-2">
               <li>Lending Built on Trust, Not Collateral.</li>
-              <li>
+              <li className="normal-case md:uppercase font-medium md:font-bold opacity-90 md:opacity-100">
                 We understand your needs are urgent. Get a loan based on your
                 potential, not your assets.
               </li>
-              <li>Fast approval process and clear, simple repayment terms</li>
+              <li>Fast approval process and simple repayment terms</li>
               <li className="text-[#04684C]">
                 The future of flexible finance is here.
               </li>
             </ul>
           </div>
 
-          <div className="relative">
+          {/* CTA Button Column */}
+          <div className="relative mt-8 md:mt-0">
             <div className={`${isLoggedIn ? "hidden" : "block"}`}>
               <button
                 onClick={handleSignInClick}
-                className="bg-[#04684C] text-white rounded-md py-3 px-5 w-[200px] font-bold relative cursor-pointer"
+                className="bg-[#04684C] hover:bg-[#03523d] transition-colors text-white rounded-md py-4 px-6 w-[220px] md:w-[200px] font-bold relative cursor-pointer shadow-lg"
               >
                 Get Started
               </button>
-              <img
-                className=" w-10 absolute right-0 left-0.5 top-1"
+              {/* Adjusted arrow for mobile - hidden on tiny screens to avoid overlap */}
+              {/* <img
+                className="hidden sm:block w-8 md:w-10 absolute right-0 -top-8 md:top-1 md:left-0.5"
                 src={uparrow}
                 alt="arrow"
-              />
+              /> */}
             </div>
+
             <h1
               className={`${
                 isLoggedIn ? "block" : "hidden"
-              } bg-[#04684C] text-white text-center rounded-md py-3 px-5 w-[200px] font-bold relative cursor-pointer`}
+              } bg-[#04684C] text-white text-center rounded-md py-4 px-6 w-[220px] md:w-[200px] font-bold relative cursor-pointer`}
             >
               Ready To Boost Your Finances
             </h1>
           </div>
         </div>
       </section>
-      <div className="bg-[#04684C] flex justify-around items-center h-12  px-10 py-3 w-full">
+      <div className="bg-[#04684C] flex flex-wrap justify-around items-center  p-5  w-full">
         <svg
           width="151"
           height="40"

@@ -22,49 +22,63 @@ export default function InterestCalculator() {
   };
 
   return (
-    <div className="bg-white flex justify-center gap-52 items-center  p-5 overflow-hidden w-full font-montserat  mx-auto">
-      <div className="w-[450px]">
-        <h1 className=" text-[#04684C] text-4xl font-bold mt-2.5 ">
+    <div className="bg-white flex flex-col lg:flex-row justify-center items-center lg:items-start gap-12 lg:gap-24 p-6 md:p-10 lg:p-20 overflow-hidden w-full font-montserat max-w-7xl mx-auto">
+      {/* --- Left Content: Information --- */}
+      <div className="w-full lg:w-1/2 max-w-[500px]">
+        <h1 className="text-[#04684C] text-3xl md:text-4xl font-bold mt-2.5 leading-tight">
           Calculate Your Returns
         </h1>
-        <span className="text-gray-700 font-semibold">
+        <p className="text-gray-700 font-semibold mt-4">
           Use our investment calculator to see potential returns based on
           different investment amounts and loan durations.
-        </span>
-        <ul className="mt-3 flex flex-col gap-3.5 font-semibold text-gray-700">
-          <li className="flex gap-1 items-center">
-            <span>
-              <img className="w-10" src={checkmark} alt="checkmack" />
-            </span>{" "}
-            Competitive interest rates from 7-12%.
+        </p>
+
+        <ul className="mt-6 flex flex-col gap-4 font-semibold text-gray-700">
+          <li className="flex gap-3 items-center">
+            <div className="shrink-0">
+              <img className="w-8 md:w-10" src={checkmark} alt="checkmark" />
+            </div>
+            <span className="text-sm md:text-base">
+              Competitive interest rates from 7-12%.
+            </span>
           </li>
-          <li className="flex gap-1 items-center">
-            <span>
-              <img className="w-10" src={checkmark} alt="checkmack" />
-            </span>{" "}
-            Flexible durations: 6 - 24 months.
+          <li className="flex gap-3 items-center">
+            <div className="shrink-0">
+              <img className="w-8 md:w-10" src={checkmark} alt="checkmark" />
+            </div>
+            <span className="text-sm md:text-base">
+              Flexible durations: 6 - 24 months.
+            </span>
           </li>
-          <li className="flex gap-1 items-center">
-            <span>
-              <img className="w-10" src={checkmark} alt="checkmack" />
-            </span>{" "}
-            Monthly payments directly to your account.
+          <li className="flex gap-3 items-center">
+            <div className="shrink-0">
+              <img className="w-8 md:w-10" src={checkmark} alt="checkmark" />
+            </div>
+            <span className="text-sm md:text-base">
+              Monthly payments directly to your account.
+            </span>
           </li>
         </ul>
       </div>
 
-      <div className="w-[600px]">
-        <div className="bg-[#04684C] p-6 text-white rounded-t-md">
+      {/* --- Right Content: Calculator --- */}
+      <div className="w-full lg:w-1/2 max-w-[550px] shadow-2xl rounded-xl">
+        {/* Header */}
+        <div className="bg-[#04684C] p-5 md:p-6 text-white rounded-t-xl">
           <div className="flex items-center gap-3">
             <Calculator className="h-6 w-6 text-emerald-200" />
-            <h3 className="text-xl font-bold">Investment Calculator</h3>
+            <h3 className="text-lg md:text-xl font-bold">
+              Investment Calculator
+            </h3>
           </div>
-          <p className="text-emerald-100 text-sm mt-1 opacity-80">
+          <p className="text-emerald-100 text-xs md:text-sm mt-1 opacity-80">
             Calculate your returns in real-time
           </p>
         </div>
 
-        <div className="p-6 space-y-8 border border-[#04684C] rounded-b-md">
+        {/* Form Body */}
+        <div className="p-5 md:p-8 space-y-8 border-x border-b border-gray-100 rounded-b-xl bg-white">
+          {/* Amount Input */}
           <div className="space-y-4">
             <div className="flex justify-between items-center">
               <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
@@ -75,7 +89,7 @@ export default function InterestCalculator() {
                 type="number"
                 value={amount}
                 onChange={(e) => setAmount(Number(e.target.value))}
-                className="w-24 text-right font-bold text-[#04684C] border-b border-gray-200 focus:border-[#04684C] outline-none"
+                className="w-28 text-right font-bold text-[#04684C] border-b border-gray-200 focus:border-[#04684C] outline-none"
               />
             </div>
             <input
@@ -93,6 +107,7 @@ export default function InterestCalculator() {
             </div>
           </div>
 
+          {/* Rate Input */}
           <div className="space-y-4">
             <div className="flex justify-between items-center">
               <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
@@ -120,12 +135,13 @@ export default function InterestCalculator() {
             />
           </div>
 
+          {/* Duration Buttons */}
           <div className="space-y-3">
             <label className="flex items-center gap-2 text-sm font-semibold text-gray-700">
               <Calendar size={16} className="text-[#04684C]" />
               Investment Duration
             </label>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {[3, 6, 12, 24].map((m) => (
                 <button
                   key={m}
@@ -142,6 +158,7 @@ export default function InterestCalculator() {
             </div>
           </div>
 
+          {/* Results Section */}
           <div className="pt-6 border-t border-gray-100 space-y-4">
             <div className="flex justify-between items-center">
               <span className="text-sm text-gray-500">
@@ -161,7 +178,7 @@ export default function InterestCalculator() {
               </div>
               <div className="flex justify-between items-center pt-3 border-t border-gray-200">
                 <span className="font-bold text-gray-800">Total Return</span>
-                <span className="text-xl font-black text-[#04684C]">
+                <span className="text-xl md:text-2xl font-black text-[#04684C]">
                   {formatCurrency(totalReturn)}
                 </span>
               </div>

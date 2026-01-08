@@ -2,9 +2,17 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
-// https://vite.dev/config/
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  plugins: [tailwindcss()],
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [react(), tailwindcss()],
 });
+
+// import { defineConfig } from "vite";
+// import react from "@vitejs/plugin-react";
+// import tailwindcss from "@tailwindcss/vite";
+
+// export default defineConfig({
+//   plugins: [react()],
+//   plugins: [tailwindcss()],
+//   plugins: [require("@tailwindcss/forms")],
+// });

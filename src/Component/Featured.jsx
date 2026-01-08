@@ -76,29 +76,33 @@ const Featured = () => {
   };
 
   return (
-    <section className="flex flex-col font-montserat px-10 py-10 gap-5 w-full">
-      {/* Stats Section */}
-      <div className="flex flex-col justify-center items-center mt-5">
-        <h1 className="uppercase text-[#04684C] text-4xl font-bold mt-5 max-w-[600px] text-center">
+    <section
+      id="featured"
+      className="flex flex-col font-montserat px-10 py-10 gap-5 w-full"
+    >
+      <div className="flex flex-col justify-center items-center mt-5 px-4">
+        <h1 className="uppercase text-[#04684C] text-2xl md:text-4xl font-bold mt-5 max-w-[600px] text-center leading-tight">
           Can help you achieve financial success
         </h1>
       </div>
 
-      <div className="flex justify-around items-center mt-10">
-        <div className="flex flex-col justify-center items-center gap-2">
-          <img className="w-20" src={growth} alt="growth" />
-          <h1 className="font-bold text-3xl">#12.5M</h1>
-          <p>Total Funded</p>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 mt-10 px-6 max-w-6xl mx-auto w-full">
+        <div className="flex flex-col items-center text-center gap-2">
+          <img className="w-16 md:w-20" src={growth} alt="growth" />
+          <h2 className="font-bold text-2xl md:text-3xl">#12.5M</h2>
+          <p className="text-gray-600">Total Funded</p>
         </div>
-        <div className="flex flex-col justify-center items-center gap-2">
-          <img className="w-20" src={spending} alt="spending" />
-          <h1 className="font-bold text-3xl">2,400+</h1>
-          <p>Active Investors</p>
+
+        <div className="flex flex-col items-center text-center gap-2">
+          <img className="w-16 md:w-20" src={spending} alt="spending" />
+          <h2 className="font-bold text-2xl md:text-3xl">2,400+</h2>
+          <p className="text-gray-600">Active Investors</p>
         </div>
-        <div className="flex flex-col justify-center items-center gap-2">
-          <img className="w-20" src={safeguarding} alt="safeguarding" />
-          <h1 className="font-bold text-3xl">850+</h1>
-          <p>Trusted Businesses</p>
+
+        <div className="flex flex-col items-center text-center gap-2">
+          <img className="w-16 md:w-20" src={safeguarding} alt="safeguarding" />
+          <h2 className="font-bold text-2xl md:text-3xl">850+</h2>
+          <p className="text-gray-600">Trusted Businesses</p>
         </div>
       </div>
 
@@ -111,7 +115,6 @@ const Featured = () => {
         </p>
       </div>
 
-      {/* Filter Bar */}
       <div className="flex flex-wrap lg:flex-nowrap justify-between items-end py-10 px-10 bg-[#04684C] rounded-md shadow-md w-full gap-6">
         <div className="w-full lg:flex-1">
           <label className="font-bold text-white text-sm">Search</label>
@@ -144,7 +147,6 @@ const Featured = () => {
         />
       </div>
 
-      {/* Results Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center mx-auto max-w-7xl w-full my-10 px-4">
         {currentItems.length > 0 ? (
           currentItems.map((item) => (
@@ -152,7 +154,7 @@ const Featured = () => {
               key={item.id}
               className="border border-gray-300 rounded-md p-5 relative shadow-md hover:shadow-lg transition-all duration-300 w-full bg-white"
             >
-              <h2 className="text-xl font-bold text-[#04684C] pr-20 truncate">
+              <h2 className="text-xl font-bold text-[#04684C] pr-20 truncate w-[250px]">
                 {item.title}
               </h2>
               <p className="text-gray-600 italic text-sm">{item.industry}</p>
@@ -163,7 +165,7 @@ const Featured = () => {
                   <span className="text-[10px] uppercase text-gray-400">
                     Amount
                   </span>
-                  <span className="font-bold text-[#04684C]">
+                  <span className="font-bold text-[#04684C] max-[420px]:truncate w-[70px] ">
                     {item.amount}
                   </span>
                 </div>
@@ -183,7 +185,7 @@ const Featured = () => {
                 </div>
               </div>
 
-              <div className="absolute top-5 right-3 flex gap-2">
+              <div className="absolute top-5 right-3 flex flex-col gap-2">
                 <span className="bg-[#04684C] text-white text-[10px] font-bold px-2 py-1 rounded">
                   Funding
                 </span>
@@ -192,7 +194,7 @@ const Featured = () => {
                 </span>
               </div>
 
-              <button className="font-bold mt-6 w-full bg-[#04684C] text-white py-2 px-4 rounded-md hover:bg-[#035d3f] transition-colors">
+              <button className="cursor-pointer font-bold mt-6 w-full bg-[#04684C] text-white py-2 px-4 rounded-md hover:bg-[#035d3f] transition-colors">
                 Invest Now
               </button>
             </div>
@@ -217,7 +219,6 @@ const Featured = () => {
         )}
       </div>
 
-      {/* Pagination Controls */}
       {filteredData.length > itemsPerPage && (
         <div className="flex justify-center items-center gap-4 mt-5">
           <button

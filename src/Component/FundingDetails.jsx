@@ -59,12 +59,11 @@ const FundingDetails = () => {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           const userData = docSnap.data();
-          setUserDetails(userData);
           setUserStatus(userData.status === "CLIENT");
         } else {
         }
       } else {
-        setUserDetails(null);
+        setUserStatus(null);
       }
     });
   };
@@ -134,16 +133,18 @@ const FundingDetails = () => {
 
   return (
     <>
-      <section className="bg-[#F7F7F7] mx-auto p-10 w-full flex flex-col gap-10 font-montserat max-[550px]:px-5">
+      <section className="bg-[#F7F7F7] mx-auto p-6 md:p-10 w-full flex flex-col gap-10 font-montserat min-h-screen">
         {!fundingDetails ? (
-          <p>Loading...</p>
+          <div className="flex justify-center items-center h-40">
+            <p className="animate-pulse font-bold text-[#04684C]">Loading...</p>
+          </div>
         ) : (
-          <div className="flex flex-col gap-5 max-w-4xl mx-auto my-8 w-full">
+          <div className="flex flex-col gap-5 max-w-4xl mx-auto my-4 md:my-8 w-full">
             {isCreator && (
-              <div className="flex justify-center">
+              <div className="flex justify-center mb-4">
                 <button
                   onClick={handleToggleEdit}
-                  className={`font-bold border-4 p-3 rounded-xl w-48 transition duration-300 cursor-pointer ${
+                  className={`font-bold border-4 p-3 rounded-xl w-full max-w-[200px] transition duration-300 cursor-pointer ${
                     isEditing
                       ? "border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
                       : "border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white"
@@ -154,8 +155,8 @@ const FundingDetails = () => {
               </div>
             )}
 
-            <div className="flex flex-col md:flex-row items-center justify-center p-7 ">
-              <div className="bg-[#04684C] w-full  p-6 rounded-md shadow-2xl">
+            <div className="flex flex-col items-center justify-center">
+              <div className="bg-[#04684C] w-full p-5 md:p-8 rounded-xl shadow-2xl">
                 {isEditing && isCreator ? (
                   <form
                     onSubmit={handleEditPost}
@@ -166,174 +167,192 @@ const FundingDetails = () => {
                       name="title"
                       value={updatedFundingDetails.businessName || ""}
                       onChange={handleChange}
-                      placeholder="Title"
-                      className="text-xl font-bold mb-2 p-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1F4B43]"
+                      placeholder="Business Name"
+                      className="text-lg md:text-xl font-bold mb-2 p-3 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400"
                     />
                     <textarea
                       name="description"
                       value={updatedFundingDetails.businessAddress || ""}
                       onChange={handleChange}
-                      placeholder="Description"
-                      rows="4"
-                      className="text-sm p-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1F4B43]"
+                      placeholder="Business Address"
+                      rows="3"
+                      className="text-sm p-3 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400"
                     />
-                    <input
-                      type="text"
-                      name="city"
-                      value={updatedFundingDetails.industry || ""}
-                      onChange={handleChange}
-                      placeholder="City"
-                      className="text-sm p-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1F4B43]"
-                    />
-                    <input
-                      type="text"
-                      name="state"
-                      value={updatedFundingDetails.interestRate || ""}
-                      onChange={handleChange}
-                      placeholder="State"
-                      className="text-sm p-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1F4B43]"
-                    />
-                    <input
-                      type="text"
-                      name="location"
-                      value={updatedFundingDetails.loanDuration || ""}
-                      onChange={handleChange}
-                      placeholder="Location"
-                      className="text-sm p-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1F4B43]"
-                    />
-                    <div className="flex gap-2">
-                      <span className="text-lg font-bold">#</span>
+
+                    {/* Responsive Grid for Inputs */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <input
-                        type="number"
-                        name="price"
-                        value={updatedFundingDetails.fundingAmount || ""}
+                        type="text"
+                        name="city"
+                        value={updatedFundingDetails.industry || ""}
                         onChange={handleChange}
-                        placeholder="Price"
-                        className="text-lg font-extrabold text-[#EB664E] p-2 border border-gray-400 rounded-lg w-1/2 focus:outline-none focus:ring-2 focus:ring-[#1F4B43]"
+                        placeholder="Industry"
+                        className="text-sm p-3 border border-gray-400 rounded-lg"
                       />
+                      <input
+                        type="text"
+                        name="state"
+                        value={updatedFundingDetails.interestRate || ""}
+                        onChange={handleChange}
+                        placeholder="Interest Rate (%)"
+                        className="text-sm p-3 border border-gray-400 rounded-lg"
+                      />
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <div className="flex items-center gap-2 flex-1">
+                        <span className="text-white font-bold">#</span>
+                        <input
+                          type="number"
+                          name="price"
+                          value={updatedFundingDetails.fundingAmount || ""}
+                          onChange={handleChange}
+                          placeholder="Funding Amount"
+                          className="text-lg font-extrabold text-[#EB664E] p-3 border border-gray-400 rounded-lg w-full"
+                        />
+                      </div>
                       <input
                         type="text"
                         name="duration"
                         value={updatedFundingDetails.useofFunds || ""}
                         onChange={handleChange}
-                        placeholder="/Duration"
-                        className="text-lg font-extrabold text-[#EB664E] p-2 border border-gray-400 rounded-lg w-1/2 focus:outline-none focus:ring-2 focus:ring-[#1F4B43]"
+                        placeholder="Use of Funds"
+                        className="text-lg font-extrabold text-[#EB664E] p-3 border border-gray-400 rounded-lg flex-1"
                       />
                     </div>
 
                     <button
                       type="submit"
-                      className="font-bold mt-5 border-4 border-[#1F4B43] p-3 rounded-xl w-full text-center text-[#1F4B43] bg-white hover:bg-[#1F4B43] hover:text-white transition duration-300"
+                      className="font-bold mt-5 p-4 rounded-xl w-full text-center text-[#04684C] bg-white hover:bg-gray-100 transition duration-300"
                     >
                       Save Changes
                     </button>
                   </form>
                 ) : (
                   <>
-                    <div>
-                      <h1 className="text-white font-bold text-2xl mt-2">
-                        Business Information
-                      </h1>
-                      <div className="flex justify-between items-center gap-5 text-gray-300 mt-5">
-                        <div className="flex flex-col">
-                          <p className="font-bold">Business Name:</p>
-                          <span className="text-sm text-center text-white">
-                            {" "}
-                            {fundingDetails.businessName}
-                          </span>
-                        </div>
-
-                        <div className="flex flex-col">
-                          <p className="font-bold">Business Address:</p>
-                          <span className="text-sm text-center text-white">
-                            {fundingDetails.businessAddress}{" "}
-                          </span>
-                        </div>
-
-                        <div className="flex flex-col">
-                          <p className="font-bold text-center">Industry:</p>
-                          <span className="text-sm text-center text-white">
-                            {fundingDetails.industry}{" "}
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col">
-                        <p className=" text-gray-300 font-bold mt-5">
-                          Business Description:{" "}
-                        </p>
-                        <span className="text-sm text-left text-white">
-                          {fundingDetails.businessDescription}
-                        </span>
-                      </div>
-
-                      <hr className="text-white mt-5"></hr>
-
+                    <div className="space-y-8">
                       <div>
-                        <h1 className="text-white font-bold text-2xl mt-2">
-                          Funding Details
-                        </h1>
-                        <div className="flex justify-between items-center gap-5 text-gray-300 mt-5">
+                        <h2 className="text-white font-bold text-xl md:text-2xl border-b border-emerald-700 pb-2">
+                          Business Information
+                        </h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-gray-300 mt-5">
                           <div className="flex flex-col">
-                            <p className="font-bold">Funding Amount: </p>
-                            <span className="text-sm text-center text-white">
+                            <p className="font-bold text-xs uppercase tracking-wider">
+                              Business Name
+                            </p>
+                            <span className="text-base text-white">
+                              {fundingDetails.businessName}
+                            </span>
+                          </div>
+                          <div className="flex flex-col">
+                            <p className="font-bold text-xs uppercase tracking-wider">
+                              Address
+                            </p>
+                            <span className="text-base text-white">
+                              {fundingDetails.businessAddress}
+                            </span>
+                          </div>
+                          <div className="flex flex-col">
+                            <p className="font-bold text-xs uppercase tracking-wider">
+                              Industry
+                            </p>
+                            <span className="text-base text-white">
+                              {fundingDetails.industry}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="mt-6">
+                          <p className="text-gray-300 font-bold text-xs uppercase tracking-wider">
+                            Description
+                          </p>
+                          <p className="text-sm text-white leading-relaxed mt-1">
+                            {fundingDetails.businessDescription}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* --- Funding Section --- */}
+                      <div>
+                        <h2 className="text-white font-bold text-xl md:text-2xl border-b border-emerald-700 pb-2">
+                          Funding Details
+                        </h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-gray-300 mt-5">
+                          <div className="flex flex-col">
+                            <p className="font-bold text-xs uppercase tracking-wider">
+                              Amount
+                            </p>
+                            <span className="text-lg font-bold text-white">
                               #{fundingDetails.fundingAmount}
                             </span>
                           </div>
-
                           <div className="flex flex-col">
-                            <p className="font-bold">Interest Rate: </p>
-                            <span className="text-sm text-center text-white">
+                            <p className="font-bold text-xs uppercase tracking-wider">
+                              Interest Rate
+                            </p>
+                            <span className="text-lg font-bold text-white">
                               {fundingDetails.interestRate}%
                             </span>
                           </div>
-
                           <div className="flex flex-col">
-                            <p className="font-bold">Loan Duration: </p>
-                            <span className="text-sm text-center text-white">
+                            <p className="font-bold text-xs uppercase tracking-wider">
+                              Duration
+                            </p>
+                            <span className="text-lg font-bold text-white">
                               {fundingDetails.loanDuration}
                             </span>
                           </div>
                         </div>
-
-                        <div className="flex flex-col">
-                          <p className=" text-gray-300 font-bold mt-5">
-                            Use of Funds:{" "}
+                        <div className="mt-6">
+                          <p className="text-gray-300 font-bold text-xs uppercase tracking-wider">
+                            Use of Funds
                           </p>
-                          <span className="text-sm text-left text-white">
+                          <p className="text-sm text-white leading-relaxed mt-1">
                             {fundingDetails.useOfFunds}
-                          </span>
+                          </p>
                         </div>
                       </div>
-                    </div>
-                    <WhatsAppChat />
-
-                    <hr className="text-white mt-5"></hr>
-
-                    <div className="flex flex-col items-center mt-5">
-                      <span className="flex justify-center gap-2 items-center w-[500px] mb-5">
-                        <input
-                          type="checkbox"
-                          name="agreeToTerms"
-                          // checked={signupFormData.agreeToTerms} // Boolean: true or false
-                          // onChange={handleCheckboxChange}
-                          className="w-8 h-5 accent-blue-600"
-                        />
-                        <label className="text-sm font-medium text-gray-300">
-                          "I confirm that I have reviewed the Scope of Work and
-                          agree to the Service Terms as discussed with{" "}
-                          {fundingDetails.businessName}."
-                        </label>
-                      </span>
-                      <button
+                      <div
                         disabled={isDisabled}
-                        onClick={handleShowModal}
                         className={`${
-                          isDisabled ? "opacity-50 cursor-not-allowed" : "block"
-                        } bg-white border-2 py-2 px-5 rounded-md cursor-pointer text-[#04684C] font-bold font-montserat`}
+                          isDisabled
+                            ? "bg-gray-500 opacity-50 cursor-not-allowed text-gray-200"
+                            : ""
+                        }`}
                       >
-                        Agreement Reached
-                      </button>
+                        <WhatsAppChat />
+                      </div>
+
+                      <hr className="border-emerald-700 mt-8" />
+
+                      {/* --- Terms & Button Section --- */}
+                      <div className="flex flex-col items-center gap-6 mt-8">
+                        <label className="flex items-start gap-3 w-full max-w-lg cursor-pointer group">
+                          <input
+                            type="checkbox"
+                            className="w-6 h-6 mt-1 accent-blue-500 shrink-0"
+                          />
+                          <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
+                            "I confirm that I have reviewed the Scope of Work
+                            and agree to the Service Terms as discussed with{" "}
+                            <span className="text-white underline">
+                              {fundingDetails.businessName}
+                            </span>
+                            ."
+                          </span>
+                        </label>
+
+                        <button
+                          disabled={isDisabled}
+                          onClick={handleShowModal}
+                          className={`w-full sm:w-auto min-w-[250px] py-4 px-8 rounded-lg font-bold shadow-lg transition-all ${
+                            isDisabled
+                              ? "bg-gray-500 opacity-50 cursor-not-allowed text-gray-200"
+                              : "bg-white text-[#04684C] hover:bg-emerald-50 active:scale-95"
+                          }`}
+                        >
+                          Agreement Reached
+                        </button>
+                      </div>
                     </div>
                   </>
                 )}
