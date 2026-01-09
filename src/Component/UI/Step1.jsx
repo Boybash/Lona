@@ -37,6 +37,7 @@ const Step1 = ({ data, onChange, errors }) => (
         <option>Technology</option>
         <option>Healthcare</option>
         <option>Finance</option>
+        <option>Agriculture</option>
         <option>Retail</option>
       </select>
       {errors.industry && (

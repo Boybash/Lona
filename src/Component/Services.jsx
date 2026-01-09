@@ -181,8 +181,11 @@ const Services = () => {
                 </div>
               </div>
 
-              <span className="absolute top-5 right-3 bg-[#04684C] text-white text-[10px] font-bold px-2 py-1 rounded">
+              <span className="absolute top-5 right-3 bg-[#04684C] text-white text-[10px] font-bold px-2 py-1 rounded animate-pulse">
                 {funding.status || "Funding"}
+              </span>
+              <span className="absolute top-12 right-3 bg-[#04684C] text-amber-300 text-[10px] font-bold px-3.5 py-1 rounded animate-pulse">
+                {funding.status || "Active"}
               </span>
 
               <button
@@ -218,7 +221,7 @@ const Services = () => {
           <button
             onClick={handlePreviousPage}
             disabled={currentPage === 1}
-            className={`bg-[#04684C] text-white py-2 px-8 rounded-md ${
+            className={`bg-[#04684C] text-white py-2 px-8 rounded-md cursor-pointer ${
               currentPage === 1
                 ? "opacity-50 cursor-not-allowed"
                 : "hover:bg-[#035d3f]"
@@ -230,7 +233,7 @@ const Services = () => {
           <button
             onClick={handleNextPage}
             disabled={indexOfLastItem >= filteredFundings.length}
-            className={`bg-[#04684C] text-white py-2 px-8 rounded-md ${
+            className={`bg-[#04684C] text-white py-2 px-8 rounded-md cursor-pointer ${
               indexOfLastItem >= filteredFundings.length
                 ? "opacity-50 cursor-not-allowed"
                 : "hover:bg-[#035d3f]"

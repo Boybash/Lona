@@ -129,7 +129,7 @@ const Signin = () => {
               <img className="w-10" src={keyicon} alt="keyicon" />
               <img
                 onClick={signInWithGoogle}
-                className="bg-white px-5 w-20 rounded-md cursor-pointer"
+                className="bg-white px-5 w-20 rounded-md cursor-pointer animate-pulse"
                 src={GoogleLogo}
                 alt="GoogleLogo"
               />

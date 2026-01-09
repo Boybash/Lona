@@ -37,7 +37,6 @@ const FundingForm = () => {
       .required("Required")
       .test("is-number", "Must be a valid number", (value) => {
         if (!value) return false;
-        // Remove all commas and check if the result is a number
         const numberWithoutCommas = value.replace(/,/g, "");
         return (
           !isNaN(parseFloat(numberWithoutCommas)) &&
@@ -102,13 +101,10 @@ const FundingForm = () => {
         userId: auth.currentUser?.uid,
         timestamp: new Date(),
       });
-      alert("Success!");
       setSubmission(true);
       window.location.href = "/";
-      // Reset or Redirect here
     } catch (err) {
       console.error(err);
-      alert("Submission failed.");
       setSubmission(false);
     } finally {
       setLoading(false);

@@ -186,10 +186,10 @@ const Featured = () => {
               </div>
 
               <div className="absolute top-5 right-3 flex flex-col gap-2">
-                <span className="bg-[#04684C] text-white text-[10px] font-bold px-2 py-1 rounded">
+                <span className="bg-[#04684C] text-white text-[10px] font-bold px-2 py-1 rounded animate-pulse">
                   Funding
                 </span>
-                <span className="bg-[#04684C] text-amber-300 text-[10px] font-bold px-2 py-1 rounded">
+                <span className="bg-[#04684C] text-amber-300 text-[10px] font-bold px-2 py-1 rounded animate-pulse">
                   Active
                 </span>
               </div>
@@ -224,7 +224,7 @@ const Featured = () => {
           <button
             onClick={handlePreviousPage}
             disabled={currentPage === 1}
-            className={`bg-[#04684C] text-white py-2 px-8 rounded-md transition-opacity ${
+            className={`bg-[#04684C] text-white py-2 px-8 rounded-md transition-opacity cursor-pointer ${
               currentPage === 1
                 ? "opacity-50 cursor-not-allowed"
                 : "hover:bg-[#035d3f]"
@@ -238,7 +238,7 @@ const Featured = () => {
           <button
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
-            className={`bg-[#04684C] text-white py-2 px-8 rounded-md transition-opacity ${
+            className={`bg-[#04684C] text-white py-2 px-8 rounded-md transition-opacity cursor-pointer ${
               currentPage === totalPages
                 ? "opacity-50 cursor-not-allowed"
                 : "hover:bg-[#035d3f]"

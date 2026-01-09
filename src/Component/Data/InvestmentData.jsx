@@ -56,6 +56,16 @@ const InvestmentData = [
     rate: "40% APR",
     duration: "3 Years",
   },
+  {
+    id: 7,
+    title: "Footwear Upgrading",
+    industry: "Manufacturing",
+    amount: "#2,000,000",
+    details:
+      "Upgrading machinery to increase production efficiency and reduce waste.",
+    rate: "40% APR",
+    duration: "3 Years",
+  },
 ];
 
 export default InvestmentData;
