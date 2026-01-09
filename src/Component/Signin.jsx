@@ -140,10 +140,10 @@ const Signin = () => {
             >
               <input
                 onChange={handleLoginFormChange}
-                className="w=full p-4 outline-0 bg-white rounded-2xl mt-3"
+                className="w-full p-4 outline-none bg-white rounded-xl mt-3 transition-all focus:ring-4 focus:ring-[#1F4B43]/50 border border-transparent focus:border-white"
                 name="email"
                 type="email"
-                placeholder="EMAIL"
+                placeholder="Enter your email"
                 value={loginFormData.email}
               />
               {errorMessages.email && (
@@ -153,7 +153,7 @@ const Signin = () => {
               <div className="relative flex flex-col">
                 <input
                   onChange={handleLoginFormChange}
-                  className="w=full p-4 outline-0 bg-white rounded-2xl mt-3"
+                  className="w=full p-4 outline-0 bg-white rounded-2xl mt-3 transition-all focus:ring-4 focus:ring-[#1F4B43]/50 border border-transparent focus:border-white"
                   name="password"
                   value={loginFormData.password}
                   type={`${showPasword ? "text" : "password"}`}

@@ -320,7 +320,7 @@ const Registration = () => {
                 <img src={lonalogo} alt="feelathomeLogo" />
                 <button
                   onClick={handleProfile}
-                  className=" font-bold border-4 border-[#04684C] p-2.5 rounded-md w-50 text-center text-white mx-auto cursor-pointer"
+                  className="bg-white border-2 py-2 px-5 rounded-md cursor-pointer text-[#04684C] font-bold font-montserat"
                 >
                   View Profile
                 </button>

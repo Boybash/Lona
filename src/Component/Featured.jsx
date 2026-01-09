@@ -165,7 +165,7 @@ const Featured = () => {
                   <span className="text-[10px] uppercase text-gray-400">
                     Amount
                   </span>
-                  <span className="font-bold text-[#04684C] max-[420px]:truncate w-[70px] ">
+                  <span className="font-bold text-[#04684C] max-[450px]:truncate w-[70px] max-[420px]:text-[10px] ">
                     {item.amount}
                   </span>
                 </div>
@@ -173,23 +173,25 @@ const Featured = () => {
                   <span className="text-[10px] uppercase text-gray-400">
                     Rate
                   </span>
-                  <span className="font-bold text-[#04684C]">{item.rate}</span>
+                  <span className="font-bold text-[#04684C] max-[420px]:text-[10px]">
+                    {item.rate}
+                  </span>
                 </div>
                 <div className="flex flex-col items-center">
                   <span className="text-[10px] uppercase text-gray-400">
                     Duration
                   </span>
-                  <span className="font-bold text-[#04684C]">
+                  <span className="font-bold text-[#04684C] max-[420px]:text-[10px]">
                     {item.duration}
                   </span>
                 </div>
               </div>
 
               <div className="absolute top-5 right-3 flex flex-col gap-2">
-                <span className="bg-[#04684C] text-white text-[10px] font-bold px-2 py-1 rounded animate-pulse">
+                <span className="bg-[#04684C] text-white text-[10px] font-bold px-2 py-1 rounded">
                   Funding
                 </span>
-                <span className="bg-[#04684C] text-amber-300 text-[10px] font-bold px-2 py-1 rounded animate-pulse">
+                <span className="bg-[#04684C] text-amber-300 text-[10px] font-bold px-2 py-1 rounded text-center animate-pulse">
                   Active
                 </span>
               </div>

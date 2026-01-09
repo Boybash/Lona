@@ -59,7 +59,7 @@ const FundingDetails = () => {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           const userData = docSnap.data();
-          setUserStatus(userData.status === "CLIENT");
+          setUserStatus(userData.status === "INVESTOR");
         } else {
         }
       } else {
@@ -344,7 +344,7 @@ const FundingDetails = () => {
                         <button
                           disabled={isDisabled}
                           onClick={handleShowModal}
-                          className={`w-full sm:w-auto min-w-[250px] py-4 px-8 rounded-lg font-bold shadow-lg transition-all ${
+                          className={`w-full sm:w-auto min-w-[250px] py-4 px-8 rounded-lg font-bold shadow-lg transition-all cursor-pointer ${
                             isDisabled
                               ? "bg-gray-500 opacity-50 cursor-not-allowed text-gray-200"
                               : "bg-white text-[#04684C] hover:bg-emerald-50 active:scale-95"

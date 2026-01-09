@@ -120,16 +120,19 @@ const Navbar = () => {
             onClick={handleProfileClick}
             className={`${
               isLoggedIn ? "block" : "hidden"
-            } flex justify-center items-center gap-2 bg-white p-1.5 rounded-md cursor-pointer text-[#04684C] font-semibold font-montserat text-xs`}
+            } flex justify-center items-center gap-2 bg-white p-1.5 rounded-md cursor-pointer text-[#04684C] font-semibold font-montserat text-xs active:scale-95`}
           >
-            <img
-              className="w-8 rounded-full border-2 border-[#04684C] aspect-square object-cover"
-              src={userImage}
-              alt="userImage"
-            />
+            <div className="relative">
+              <img
+                className="w-8 rounded-full border-2 border-[#04684C] aspect-square object-cover"
+                src={userImage}
+                alt="userImage"
+              />
+              <div className="absolute bottom-0 right-0 left-6 w-3 h-3 bg-green-400 border-2 border-[#04684C] rounded-full"></div>
+            </div>
             <div>
               <h5>Welcome,</h5>
-              <span>{user}</span>
+              <span className="truncate">{user}</span>
             </div>
           </div>
         </div>

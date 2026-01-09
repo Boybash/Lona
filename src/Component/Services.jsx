@@ -159,7 +159,7 @@ const Services = () => {
                   <span className="text-[10px] uppercase text-gray-400 text-center">
                     Amount
                   </span>
-                  <span className="font-bold text-[#04684C] max-[420px]:truncate w-[70px]">
+                  <span className="font-bold text-[#04684C] max-[420px]:truncate w-[70px] max-[420px]:text-[10px]">
                     #{funding.fundingAmount}
                   </span>
                 </div>
@@ -167,7 +167,7 @@ const Services = () => {
                   <span className="text-[10px] uppercase text-gray-400 text-center">
                     Rate
                   </span>
-                  <span className="font-bold text-[#04684C]">
+                  <span className="font-bold text-[#04684C] max-[420px]:text-[10px]">
                     {funding.interestRate}% APR
                   </span>
                 </div>
@@ -175,13 +175,13 @@ const Services = () => {
                   <span className="text-[10px] uppercase text-gray-400 text-center">
                     Duration
                   </span>
-                  <span className="font-bold text-[#04684C]">
+                  <span className="font-bold text-[#04684C] text-center max-[420px]:text-[10px]">
                     {funding.loanDuration}
                   </span>
                 </div>
               </div>
 
-              <span className="absolute top-5 right-3 bg-[#04684C] text-white text-[10px] font-bold px-2 py-1 rounded animate-pulse">
+              <span className="absolute top-5 right-3 bg-[#04684C] text-white text-[10px] font-bold px-2 py-1 rounded ">
                 {funding.status || "Funding"}
               </span>
               <span className="absolute top-12 right-3 bg-[#04684C] text-amber-300 text-[10px] font-bold px-3.5 py-1 rounded animate-pulse">
