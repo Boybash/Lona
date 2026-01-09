@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import spending from "../assets/double-spending.png";
-import safeguarding from "../assets/safeguarding.png";
-import growth from "../assets/growth.png";
+
 import InvestmentData from "../Component/Data/InvestmentData.jsx";
 import CustomSelect from "./CustomSelect.jsx";
+import { Fade } from "react-awesome-reveal";
 
 const Featured = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -80,32 +79,6 @@ const Featured = () => {
       id="featured"
       className="flex flex-col font-montserat px-10 py-10 gap-5 w-full"
     >
-      <div className="flex flex-col justify-center items-center mt-5 px-4">
-        <h1 className="uppercase text-[#04684C] text-2xl md:text-4xl font-bold mt-5 max-w-[600px] text-center leading-tight">
-          Can help you achieve financial success
-        </h1>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 mt-10 px-6 max-w-6xl mx-auto w-full">
-        <div className="flex flex-col items-center text-center gap-2">
-          <img className="w-16 md:w-20" src={growth} alt="growth" />
-          <h2 className="font-bold text-2xl md:text-3xl">#12.5M</h2>
-          <p className="text-gray-600">Total Funded</p>
-        </div>
-
-        <div className="flex flex-col items-center text-center gap-2">
-          <img className="w-16 md:w-20" src={spending} alt="spending" />
-          <h2 className="font-bold text-2xl md:text-3xl">2,400+</h2>
-          <p className="text-gray-600">Active Investors</p>
-        </div>
-
-        <div className="flex flex-col items-center text-center gap-2">
-          <img className="w-16 md:w-20" src={safeguarding} alt="safeguarding" />
-          <h2 className="font-bold text-2xl md:text-3xl">850+</h2>
-          <p className="text-gray-600">Trusted Businesses</p>
-        </div>
-      </div>
-
       <div className="mt-10">
         <h1 className="text-[#04684C] text-3xl font-bold">
           Featured Opportunities
@@ -114,119 +87,121 @@ const Featured = () => {
           Discover businesses seeking funding right now
         </p>
       </div>
+      <Fade direction="up" delay={300} duration={1000} triggerOnce>
+        <div className="flex flex-wrap lg:flex-nowrap justify-between items-end py-10 px-10 bg-[#04684C] rounded-md shadow-md w-full gap-6">
+          <div className="w-full lg:flex-1">
+            <label className="font-bold text-white text-sm">Search</label>
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search for investment opportunities"
+              className="bg-white rounded-md p-2 w-full mt-2 text-sm h-[40px] outline-none focus:ring-2 focus:ring-white/50"
+            />
+          </div>
 
-      <div className="flex flex-wrap lg:flex-nowrap justify-between items-end py-10 px-10 bg-[#04684C] rounded-md shadow-md w-full gap-6">
-        <div className="w-full lg:flex-1">
-          <label className="font-bold text-white text-sm">Search</label>
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search for investment opportunities"
-            className="bg-white rounded-md p-2 w-full mt-2 text-sm h-[40px] outline-none focus:ring-2 focus:ring-white/50"
+          <CustomSelect
+            label="Industry"
+            options={industries}
+            selected={industry}
+            setSelected={setIndustry}
+          />
+          <CustomSelect
+            label="Duration"
+            options={durations}
+            selected={duration}
+            setSelected={setDuration}
+          />
+          <CustomSelect
+            label="Status"
+            options={statuses}
+            selected={status}
+            setSelected={setStatus}
           />
         </div>
+      </Fade>
+      <Fade delay={200} duration={1000}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center mx-auto max-w-7xl w-full my-10 px-4">
+          {currentItems.length > 0 ? (
+            currentItems.map((item) => (
+              <div
+                key={item.id}
+                className="border border-gray-300 rounded-md p-5 relative shadow-md hover:shadow-lg transition-all duration-300 w-full bg-white"
+              >
+                <h2 className="text-xl font-bold text-[#04684C] pr-20 truncate w-[250px] max-[500px]:w-[200px]">
+                  {item.title}
+                </h2>
+                <p className="text-gray-600 italic text-sm">{item.industry}</p>
+                <p className="mt-3 text-sm line-clamp-3">{item.details}</p>
 
-        <CustomSelect
-          label="Industry"
-          options={industries}
-          selected={industry}
-          setSelected={setIndustry}
-        />
-        <CustomSelect
-          label="Duration"
-          options={durations}
-          selected={duration}
-          setSelected={setDuration}
-        />
-        <CustomSelect
-          label="Status"
-          options={statuses}
-          selected={status}
-          setSelected={setStatus}
-        />
-      </div>
+                <div className="mt-4 flex justify-between items-end border-t pt-4">
+                  <div className="flex flex-col items-center">
+                    <span className="text-[10px] uppercase text-gray-400">
+                      Amount
+                    </span>
+                    <span className="font-bold text-[#04684C] max-[450px]:truncate w-[70px] max-[420px]:text-[10px] ">
+                      {item.amount}
+                    </span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <span className="text-[10px] uppercase text-gray-400">
+                      Rate
+                    </span>
+                    <span className="font-bold text-[#04684C] max-[420px]:text-[10px]">
+                      {item.rate}
+                    </span>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <span className="text-[10px] uppercase text-gray-400">
+                      Duration
+                    </span>
+                    <span className="font-bold text-[#04684C] max-[420px]:text-[10px]">
+                      {item.duration}
+                    </span>
+                  </div>
+                </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center mx-auto max-w-7xl w-full my-10 px-4">
-        {currentItems.length > 0 ? (
-          currentItems.map((item) => (
-            <div
-              key={item.id}
-              className="border border-gray-300 rounded-md p-5 relative shadow-md hover:shadow-lg transition-all duration-300 w-full bg-white"
-            >
-              <h2 className="text-xl font-bold text-[#04684C] pr-20 truncate w-[250px]">
-                {item.title}
+                <div className="absolute top-5 right-3 flex flex-col gap-2">
+                  <span className="bg-[#04684C] text-white text-[10px] font-bold px-2 py-1 rounded">
+                    Funding
+                  </span>
+                  <span className="bg-[#04684C] text-amber-300 text-[10px] font-bold px-2 py-1 rounded text-center animate-pulse">
+                    Active
+                  </span>
+                </div>
+
+                <button className="cursor-pointer font-bold mt-6 w-full bg-[#04684C] text-white py-2 px-4 rounded-md hover:bg-[#035d3f] transition-colors">
+                  Invest Now
+                </button>
+              </div>
+            ))
+          ) : (
+            <div className="col-span-full py-20 text-center">
+              <h2 className="text-2xl font-bold text-gray-400">
+                No results match your filters.
               </h2>
-              <p className="text-gray-600 italic text-sm">{item.industry}</p>
-              <p className="mt-3 text-sm line-clamp-3">{item.details}</p>
-
-              <div className="mt-4 flex justify-between items-end border-t pt-4">
-                <div className="flex flex-col items-center">
-                  <span className="text-[10px] uppercase text-gray-400">
-                    Amount
-                  </span>
-                  <span className="font-bold text-[#04684C] max-[450px]:truncate w-[70px] max-[420px]:text-[10px] ">
-                    {item.amount}
-                  </span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <span className="text-[10px] uppercase text-gray-400">
-                    Rate
-                  </span>
-                  <span className="font-bold text-[#04684C] max-[420px]:text-[10px]">
-                    {item.rate}
-                  </span>
-                </div>
-                <div className="flex flex-col items-center">
-                  <span className="text-[10px] uppercase text-gray-400">
-                    Duration
-                  </span>
-                  <span className="font-bold text-[#04684C] max-[420px]:text-[10px]">
-                    {item.duration}
-                  </span>
-                </div>
-              </div>
-
-              <div className="absolute top-5 right-3 flex flex-col gap-2">
-                <span className="bg-[#04684C] text-white text-[10px] font-bold px-2 py-1 rounded">
-                  Funding
-                </span>
-                <span className="bg-[#04684C] text-amber-300 text-[10px] font-bold px-2 py-1 rounded text-center animate-pulse">
-                  Active
-                </span>
-              </div>
-
-              <button className="cursor-pointer font-bold mt-6 w-full bg-[#04684C] text-white py-2 px-4 rounded-md hover:bg-[#035d3f] transition-colors">
-                Invest Now
+              <button
+                onClick={() => {
+                  setSearchTerm("");
+                  setIndustry("All Industries");
+                  setStatus("All Status");
+                  setDuration("All Durations");
+                }}
+                className="text-[#04684C] underline mt-2 cursor-pointer"
+              >
+                Clear all filters
               </button>
             </div>
-          ))
-        ) : (
-          <div className="col-span-full py-20 text-center">
-            <h2 className="text-2xl font-bold text-gray-400">
-              No results match your filters.
-            </h2>
-            <button
-              onClick={() => {
-                setSearchTerm("");
-                setIndustry("All Industries");
-                setStatus("All Status");
-                setDuration("All Durations");
-              }}
-              className="text-[#04684C] underline mt-2 cursor-pointer"
-            >
-              Clear all filters
-            </button>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      </Fade>
 
       {filteredData.length > itemsPerPage && (
-        <div className="flex justify-center items-center gap-4 mt-5">
+        <div className="flex justify-center items-center gap-4 mt-5 max-[500px]:flex-col">
           <button
             onClick={handlePreviousPage}
             disabled={currentPage === 1}
-            className={`bg-[#04684C] text-white py-2 px-8 rounded-md transition-opacity cursor-pointer ${
+            className={`bg-[#04684C] text-white py-2 px-8 w-[200px] rounded-md transition-opacity cursor-pointer ${
               currentPage === 1
                 ? "opacity-50 cursor-not-allowed"
                 : "hover:bg-[#035d3f]"
@@ -240,7 +215,7 @@ const Featured = () => {
           <button
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
-            className={`bg-[#04684C] text-white py-2 px-8 rounded-md transition-opacity cursor-pointer ${
+            className={`bg-[#04684C] text-white py-2 px-8 w-[200px] rounded-md transition-opacity cursor-pointer ${
               currentPage === totalPages
                 ? "opacity-50 cursor-not-allowed"
                 : "hover:bg-[#035d3f]"

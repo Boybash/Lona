@@ -179,7 +179,6 @@ const FundingDetails = () => {
                       className="text-sm p-3 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400"
                     />
 
-                    {/* Responsive Grid for Inputs */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <input
                         type="text"
@@ -271,7 +270,6 @@ const FundingDetails = () => {
                         </div>
                       </div>
 
-                      {/* --- Funding Section --- */}
                       <div>
                         <h2 className="text-white font-bold text-xl md:text-2xl border-b border-emerald-700 pb-2">
                           Funding Details
@@ -323,8 +321,6 @@ const FundingDetails = () => {
                       </div>
 
                       <hr className="border-emerald-700 mt-8" />
-
-                      {/* --- Terms & Button Section --- */}
                       <div className="flex flex-col items-center gap-6 mt-8">
                         <label className="flex items-start gap-3 w-full max-w-lg cursor-pointer group">
                           <input

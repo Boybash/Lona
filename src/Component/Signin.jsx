@@ -111,6 +111,7 @@ const Signin = () => {
     setShowPassword(!showPasword);
   }
   function handleCloseModal() {
+    setLoginSubmissionStatus(null);
     setCloseModal("closemodal");
   }
   function handleSignupForm() {
