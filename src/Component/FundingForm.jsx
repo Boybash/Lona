@@ -4,10 +4,9 @@ import * as yup from "yup";
 import { collection, addDoc } from "firebase/firestore";
 import { auth, dataBase } from "../../Firebase";
 import BussinessLogo from "../assets/business_11692299.png";
-import FormInput from "./UI/FormInput";
-import Step1 from "./UI/Step1";
-import Step2 from "./UI/Step2";
-import Step3Review from "./UI/step3";
+import Step1 from "../Component/UI/Step1";
+import Step2 from "../Component/UI/Step2";
+import Step3Review from "../Component/UI/Step3";
 
 const FundingForm = () => {
   const [step, setStep] = useState(1);
