@@ -3,7 +3,7 @@ import { useState } from "react";
 import * as yup from "yup";
 import showpassword from "../assets/show eye.svg";
 import hidepassword from "../assets/hide eye.svg";
-import lonalogo from "../assets/lona logo.png";
+import lonalogo from "../assets/Lona Logo.png";
 import xicon from "../assets/xicon.png";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Firebase";
