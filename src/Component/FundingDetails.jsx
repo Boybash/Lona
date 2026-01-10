@@ -3,9 +3,7 @@ import { useCallback } from "react";
 import { dataBase, auth } from "../../Firebase";
 import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import LonaLogo from "../assets/Lona Logo.png";
-import xicon from "../assets/xicon.png";
-import WhatsAppChat from "./UI/WhatsappChat";
+import WhatsAppChat from "../Component/UI/WhatsAppChat";
 
 const FundingDetails = () => {
   const { fundingId } = useParams();
