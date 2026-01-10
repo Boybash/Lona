@@ -7,12 +7,15 @@ import BussinessLogo from "../assets/business_11692299.png";
 import Step1 from "../Component/UI/Step1";
 import Step2 from "../Component/UI/Step2";
 import Step3Review from "../Component/UI/Step3";
+import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 
 const FundingForm = () => {
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [submission, setSubmission] = useState(null);
+  const [isloggedIn, setIsLoggedIn] = useState(null);
+  const [userStatus, setUserStatus] = useState(null);
   const location = useLocation();
 
   const [fundingData, setFundingData] = useState({
@@ -109,6 +112,34 @@ const FundingForm = () => {
       setLoading(false);
     }
   };
+  const fetchUserdata = async () => {
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const docRef = doc(dataBase, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          setUserStatus(userData.status === "INVESTOR");
+        } else {
+        }
+      } else {
+        setUserStatus(null);
+      }
+    });
+  };
+
+  useEffect(() => {
+    fetchUserdata();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setIsLoggedIn(user !== null);
+    });
+    return unsubscribe;
+  }, []);
+
+  const isDisabled = !isloggedIn || userStatus;
 
   const handleChange = (e) =>
     setFundingData({ ...fundingData, [e.target.name]: e.target.value });
@@ -170,8 +201,12 @@ const FundingForm = () => {
           )}
           <button
             type="submit"
-            disabled={loading}
-            className="bg-white px-10 py-2 rounded font-bold text-[#04684C] uppercase ml-auto cursor-pointer"
+            disabled={loading || isDisabled}
+            className={` ${
+              isDisabled
+                ? "bg-gray-500 opacity-50 cursor-not-allowed text-gray-200"
+                : ""
+            } bg-white px-10 py-2 rounded font-bold text-[#04684C] uppercase ml-auto cursor-pointer`}
           >
             {loading ? "Processing..." : step === 3 ? "Submit" : "Next"}
           </button>
