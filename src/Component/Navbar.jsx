@@ -112,7 +112,7 @@ const Navbar = () => {
             onClick={handleSignInClick}
             className={` ${
               isLoggedIn ? "hidden" : ""
-            }bg-white border-2 py-2 px-5 rounded-md cursor-pointer text-[#04684C] font-bold font-montserat`}
+            }bg-white border-2 py-2 px-5 rounded-md cursor-pointer text-[#04684C] font-bold font-montserat active:scale-95`}
           >
             Sign In
           </button>

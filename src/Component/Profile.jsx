@@ -106,7 +106,7 @@ const Profile = () => {
                 </button>
                 <button
                   onClick={handleSignOut}
-                  className="px-6 py-3 cursor-pointer border border-white/30 rounded-xl font-medium hover:bg-white/10 transition-colors"
+                  className="px-6 py-3 cursor-pointer border border-white/30 rounded-xl font-medium hover:bg-white/10 transition-colors active:scale-95"
                 >
                   Log Out
                 </button>

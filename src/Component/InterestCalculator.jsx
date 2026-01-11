@@ -83,10 +83,15 @@ export default function InterestCalculator() {
                   Investment Amount
                 </label>
                 <input
-                  type="number"
-                  value={amount}
-                  onChange={(e) => setAmount(Number(e.target.value))}
-                  className="w-28 text-right font-bold text-[#04684C] border-b border-gray-200 focus:border-[#04684C] outline-none"
+                  type="text"
+                  value={amount === 0 ? "" : amount.toLocaleString()}
+                  onChange={(e) => {
+                    const rawValue = e.target.value.replace(/\D/g, "");
+                    const numValue = Number(rawValue);
+                    setAmount(numValue);
+                  }}
+                  className="w-32 text-right font-bold text-[#04684C] border-b border-gray-200 focus:border-[#04684C] outline-none"
+                  placeholder="0"
                 />
               </div>
               <input

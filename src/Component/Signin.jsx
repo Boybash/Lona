@@ -172,7 +172,7 @@ const Signin = () => {
               </div>
               <div className="mx-auto flex flex-col gap-5 mt-5">
                 <p className="text-center"> Forgot Your Password?</p>
-                <button className="bg-white border-2 py-2 px-3 rounded-md cursor-pointer text-[#04684C] font-bold font-montserat">
+                <button className="bg-white border-2 py-2 px-3 rounded-md cursor-pointer text-[#04684C] font-bold font-montserat active:scale-95">
                   SIGN IN
                 </button>
               </div>
@@ -186,7 +186,7 @@ const Signin = () => {
             </p>
             <button
               onClick={handleSignupForm}
-              className="bg-white border-2 py-2 px-5 rounded-md cursor-pointer text-[#04684C] font-bold font-montserat"
+              className="bg-white border-2 py-2 px-5 rounded-md cursor-pointer text-[#04684C] font-bold font-montserat active:scale-95"
             >
               {" "}
               SIGN UP

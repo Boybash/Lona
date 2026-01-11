@@ -10,6 +10,7 @@ const Step2 = ({ data, onChange, errors }) => (
       onChange={onChange}
       error={errors.fundingAmount}
       placeholder="50000"
+      prefix="#"
     />
     <FormInput
       label="Interest Rate (%)"

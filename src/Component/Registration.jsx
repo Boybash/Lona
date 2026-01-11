@@ -18,6 +18,7 @@ const Registration = () => {
   const [errorMessages, setErrorMessages] = useState({});
   const [signupSubmissionStatus, setSignupSubmissionStatus] = useState("");
   const [closeModal, setCloseModal] = useState("");
+  const [loading, setLoading] = useState(false);
   const [signupFormData, setSignupFormData] = useState({
     image: "",
     othernames: "",
@@ -96,6 +97,7 @@ const Registration = () => {
 
   async function handleSignupFormSubmit(e) {
     e.preventDefault();
+    setLoading(true);
     try {
       await schema.validate(signupFormData, { abortEarly: false });
       setErrorMessages({});
@@ -116,6 +118,7 @@ const Registration = () => {
         createdAt: new Date(),
       });
       setSignupSubmissionStatus(true);
+      navigate("/profile");
       resetForm();
     } catch (err) {
       const errors = {};
@@ -134,6 +137,7 @@ const Registration = () => {
       }
       setErrorMessages(errors);
       setSignupSubmissionStatus(false);
+      setLoading(false);
     }
   }
 
@@ -300,8 +304,8 @@ const Registration = () => {
               </div>
 
               <div className="flex mx-auto items-center justify-center mt-8 w-full">
-                <button className="bg-white border-2 py-2 px-3 rounded-md cursor-pointer text-[#04684C] font-bold font-montserat">
-                  SIGN UP
+                <button className="bg-white border-2 py-2 px-3 rounded-md cursor-pointer text-[#04684C] font-bold font-montserat active:scale-95">
+                  {loading ? "Submitting..." : "CREATE ACCOUNT"}
                 </button>
               </div>
             </div>
@@ -318,21 +322,9 @@ const Registration = () => {
                 } bg-[#04684C] flex flex-col gap-5 justify-center items-center p-10 rounded-md w-[400px] relative max-[410px]:w-[300px]`}
               >
                 <img src={lonalogo} alt="feelathomeLogo" />
-                <button
-                  onClick={handleProfile}
-                  className="bg-white border-2 py-2 px-5 rounded-md cursor-pointer text-[#04684C] font-bold font-montserat"
-                >
-                  View Profile
-                </button>
                 <p className="text-green-600 font-bold text-2xl text-center">
                   Account Created Successfully!
                 </p>
-                <img
-                  onClick={handleCloseModal}
-                  className="absolute top-2 right-2 w-10 cursor-pointer"
-                  src={xicon}
-                  alt="xicon"
-                />
               </div>
             </div>
           )}

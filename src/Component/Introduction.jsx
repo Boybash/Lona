@@ -90,7 +90,7 @@ const Introduction = () => {
           <Slide direction="right" delay={100}>
             <div className="flex flex-col gap-4 justify-center items-center bg-[#04684C] p-8 md:p-10 rounded-xl shadow-md min-h-[280px]">
               <h2 className="font-bold text-2xl md:text-3xl text-white">
-                For Clients
+                For Investors
               </h2>
               <p className="text-center text-gray-300 text-sm">
                 Earn attractive returns by investing in vetted businesses

@@ -194,7 +194,7 @@ const FundingForm = () => {
             <button
               type="button"
               onClick={() => setStep(step - 1)}
-              className="bg-white px-10 py-2 rounded font-bold text-[#04684C] uppercase cursor-pointer"
+              className="bg-white px-10 py-2 rounded font-bold text-[#04684C] uppercase cursor-pointer active:scale-95"
             >
               Back
             </button>
@@ -206,7 +206,7 @@ const FundingForm = () => {
               isDisabled
                 ? "bg-gray-500 opacity-50 cursor-not-allowed text-gray-200"
                 : ""
-            } bg-white px-10 py-2 rounded font-bold text-[#04684C] uppercase ml-auto cursor-pointer`}
+            } bg-white px-10 py-2 rounded font-bold text-[#04684C] uppercase ml-auto cursor-pointer active:scale-95`}
           >
             {loading ? "Processing..." : step === 3 ? "Submit" : "Next"}
           </button>
