@@ -88,7 +88,7 @@ const Featured = () => {
         </p>
       </div>
       <Fade direction="up" delay={300} duration={1000} triggerOnce>
-        <div className="flex flex-wrap lg:flex-nowrap justify-between items-end py-10 px-10 bg-[#04684C] rounded-md shadow-md w-full gap-6">
+        <div className=" z-20 flex flex-wrap lg:flex-nowrap justify-between items-end py-10 px-10 bg-[#04684C] rounded-md shadow-md w-full gap-6">
           <div className="w-full lg:flex-1">
             <label className="font-bold text-white text-sm">Search</label>
             <input

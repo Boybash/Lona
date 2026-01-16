@@ -139,7 +139,7 @@ const Services = () => {
         </span>
       </div>
       <Fade direction="up" delay={100} duration={1000} triggerOnce>
-        <div className="flex flex-wrap lg:flex-nowrap justify-between items-end py-10 px-10 bg-[#04684C] rounded-md shadow-md w-full gap-6">
+        <div className=" z-20 flex flex-wrap lg:flex-nowrap justify-between items-end py-10 px-10 bg-[#04684C] rounded-md shadow-md w-full gap-6">
           <div className="w-full lg:flex-1">
             <label className="font-bold text-white text-sm">Search</label>
             <input
@@ -173,7 +173,7 @@ const Services = () => {
       </Fade>
 
       <Fade delay={200} duration={1000}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center mx-auto max-w-7xl w-full my-10 px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-items-center mx-auto max-w-7xl w-full my-10 px-4 z-30">
           {currentItems.length > 0 ? (
             currentItems.map((funding) => (
               <div
